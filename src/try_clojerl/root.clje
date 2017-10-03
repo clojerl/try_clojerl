@@ -1,0 +1,18 @@
+(ns try-clojerl.root
+  (:require [hiccup.core :as h]))
+
+(def message "Hello World!")
+
+(defn init
+  [_type req _opts]
+  #erl[:ok req nil])
+
+(defn handle
+  [req state]
+  (let* [html (h/html [:body [:h1 "Hello World!"]])
+         #erl[:ok, req] (cowboy_req/reply.e 200 #erl() html req)]
+    #erl[:ok req state]))
+
+(defn terminate
+  [reason req state]
+  :ok)

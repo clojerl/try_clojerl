@@ -1,0 +1,16 @@
+{ application
+, 'try-clojerl'
+, [ {description, "Try Clojure"}
+  , {vsn, git}
+  , {modules, []}
+  , {registered, []}
+  , {mod, {'try-clojerl.app', []}}
+  , { applications
+    , [ kernel
+      , stdlib
+      , cowboy
+      , clojerl
+      ]
+    }
+  ]
+}.
