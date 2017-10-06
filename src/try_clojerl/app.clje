@@ -17,7 +17,10 @@
 (defn ->proplist [m]
   (->list (map into-tuple m)))
 
-(def routes {:_ [["/" :try-clojerl.root nil]]})
+(def routes
+  {:_ [["/" :try-clojerl.root nil]
+       ["/css/[...]" :cowboy_static #erl[:priv_dir :try_clojerl "css"]]
+       ["/js/[...]"  :cowboy_static #erl[:priv_dir :try_clojerl "js"]]]})
 
 (defn- route->cowboy [[host handlers]]
   #erl[host (->list (map into-tuple handlers))])
@@ -25,7 +28,7 @@
 (defn start-cowboy []
   (let [routes (->list (map route->cowboy routes))
         dispatch (cowboy_router/compile.e routes)
-        acceptors 100
+        acceptors 10
         port (->proplist {:port 8080})
         opts (->proplist {:env (->proplist {:dispatch dispatch})})]
     (cowboy/start_http.e :try-clojerl.listener acceptors port opts)))

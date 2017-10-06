@@ -1,7 +1,6 @@
 (ns try-clojerl.root
-  (:require [hiccup.core :as h]))
-
-(def message "Hello World!")
+  (:require [try-clojerl.layout :as l]
+            [hiccup.core :as h]))
 
 (defn init
   [_type req _opts]
@@ -9,7 +8,7 @@
 
 (defn handle
   [req state]
-  (let* [html (h/html [:body [:h1 "Hello World!"]])
+  (let* [html (h/html (l/page "Try Clojerl" "Root"))
          #erl[:ok, req] (cowboy_req/reply.e 200 #erl() html req)]
     #erl[:ok req state]))
 

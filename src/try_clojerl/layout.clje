@@ -1,0 +1,17 @@
+(ns try-clojerl.layout)
+
+(defn* head-link [:stylesheet file]
+  [:link {:rel  "stylesheet"
+          :type "text/css"
+          :href file}])
+
+(defn head [title]
+  [:head
+   [:title title]
+   (head-link :stylesheet "css/main.css")])
+
+(def header [:div#header])
+
+(defn page [title content]
+  [:html (head title)
+   [:body header content]])
