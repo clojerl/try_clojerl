@@ -1,5 +1,5 @@
--sname try-clojerl
+-sname try_clojerl
 
--setcookie try-clojerl
+-setcookie try_clojerl
 
 -mode interactive

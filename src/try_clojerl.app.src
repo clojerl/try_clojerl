@@ -1,4 +1,4 @@
-{ application, 'try-clojerl'
+{ application, try_clojerl
 , [ {vsn, git}
   , {description, "Try Clojure"}
   , {modules, []}
