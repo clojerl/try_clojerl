@@ -1,4 +1,4 @@
-(ns try-clojerl.root
+(ns try-clojerl.index
   (:require [try-clojerl.layout :as l]))
 
 (defn init
