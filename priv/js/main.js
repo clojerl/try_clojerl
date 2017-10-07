@@ -21,7 +21,11 @@ var init = function() {
   var oninit = function() {
     var term = this;
     conn.onmessage = function(message) {
-      term.echo(message.data);
+      var json = JSON.parse(message.data);
+      term.set_prompt(json.current_ns);
+      if(json.result) {
+        term.echo(json.result);
+      }
     };
   };
 
@@ -35,7 +39,8 @@ var init = function() {
   $('#terminal').terminal(function(command) {
     if (command.trim() !== '') {
       try {
-        conn.send(command);
+        var message = {cmd: command};
+        conn.send(JSON.stringify(message));
       } catch(e) {
         this.error(new String(e));
       }

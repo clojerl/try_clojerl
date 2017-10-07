@@ -1,18 +1,33 @@
 (ns try-clojerl.repl)
 
+(declare build-reply)
+
 (defn init
   [req state]
   (let [opts #erl{:compress     true
                   :idle_timeout 600000}]
     #erl[:cowboy_websocket req state opts]))
 
-(defn websocket_handle [in-frame state]
-  (let* [#erl[_ body] in-frame
-         result (try (eval (read-string body))
+(defn websocket_init [state]
+  (in-ns 'clje.user)
+  #erl[:reply (build-reply) state])
+
+(defn* websocket_handle [#erl[:text data] state]
+  (let* [json   (jsx/decode.e data #erl(:return_maps))
+         result (try (eval (read-string (get json "cmd")))
                      (catch _ e e))
-         resp-body (pr-str result)
-         out-frame #erl[:text resp-body]]
+         out-frame (build-reply result)]
     #erl[:reply out-frame state]))
 
 (defn websocket_info [_info state]
   #erl[:ok state])
+
+(defn build-reply
+  ([]
+   #erl[:text
+        (jsx/encode.e #erl{:current_ns (str *ns* "=> ")})])
+  ([result]
+   #erl[:text
+        (jsx/encode.e
+         #erl{:result (pr-str result)
+              :current_ns (str *ns* "=> ")})]))
