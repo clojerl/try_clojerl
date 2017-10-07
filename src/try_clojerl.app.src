@@ -8,6 +8,7 @@
       , cowboy
       , clojerl
       , hiccup
+      , jsx
       ]
     }
   , {mod, {'try-clojerl.app', []}}
