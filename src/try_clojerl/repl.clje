@@ -2,9 +2,17 @@
 
 (defn init
   [req state]
-  (let* [#erl[:ok body req] (cowboy_req/read_body.e req)
+  (let [opts #erl{:compress     true
+                  :idle_timeout 600000}]
+    #erl[:cowboy_websocket req state opts]))
+
+(defn websocket_handle [in-frame state]
+  (let* [#erl[_ body] in-frame
          result (try (eval (read-string body))
-                  (catch _ e e))
+                     (catch _ e e))
          resp-body (pr-str result)
-         req (cowboy_req/reply.e 200 #erl{} resp-body req)]
-    #erl[:ok req state]))
+         out-frame #erl[:text resp-body]]
+    #erl[:reply out-frame state]))
+
+(defn websocket_info [_info state]
+  #erl[:ok state])
