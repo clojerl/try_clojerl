@@ -18,7 +18,8 @@
   (->list (map into-tuple m)))
 
 (def routes
-  {:_ [["/" :try-clojerl.root nil]
+  {:_ [["/"     :try-clojerl.root nil]
+       ["/repl" :try-clojerl.repl nil]
        ["/css/[...]" :cowboy_static #erl[:priv_dir :try_clojerl "css"]]
        ["/js/[...]"  :cowboy_static #erl[:priv_dir :try_clojerl "js"]]]})
 

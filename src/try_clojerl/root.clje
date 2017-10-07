@@ -8,7 +8,7 @@
 
 (defn handle
   [req state]
-  (let* [html (h/html (l/page "Try Clojerl" "Root"))
+  (let* [html (h/html (l/index "Try Clojerl" [:div#terminal]))
          #erl[:ok, req] (cowboy_req/reply.e 200 #erl() html req)]
     #erl[:ok req state]))
 
