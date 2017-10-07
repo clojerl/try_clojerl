@@ -22,12 +22,13 @@
 (defn websocket_info [_info state]
   #erl[:ok state])
 
+(defn prompt [] (str *ns* "=> "))
+
 (defn build-reply
   ([]
    #erl[:text
-        (jsx/encode.e #erl{:current_ns (str *ns* "=> ")})])
+        (jsx/encode.e #erl{:current_ns (prompt)})])
   ([result]
    #erl[:text
-        (jsx/encode.e
-         #erl{:result (pr-str result)
-              :current_ns (str *ns* "=> ")})]))
+        (jsx/encode.e #erl{:result (pr-str result)
+                           :current_ns (prompt)})]))

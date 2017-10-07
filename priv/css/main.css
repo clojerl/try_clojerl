@@ -4,4 +4,11 @@ body {
 
 #terminal {
     border-radius: 5px;
+    color: #FFF;
+    text-shadow: 0 0 10px #FFF;
+}
+
+.prompt {
+    color: #FFF;
+    text-shadow: 0 0 10px #FFF;
 }
