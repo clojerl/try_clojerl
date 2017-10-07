@@ -29,7 +29,6 @@
 (defn start-cowboy []
   (let [routes (->list (map route->cowboy routes))
         dispatch (cowboy_router/compile.e routes)
-        acceptors 10
-        port (->proplist {:port 8080})
-        opts (->proplist {:env (->proplist {:dispatch dispatch})})]
-    (cowboy/start_http.e :try-clojerl.listener acceptors port opts)))
+        transport-opts (->proplist {:port 8080})
+        protocol-opts #erl{:env #erl{:dispatch dispatch}}]
+    (cowboy/start_clear.e :try-clojerl.listener transport-opts protocol-opts)))

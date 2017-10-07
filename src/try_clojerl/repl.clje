@@ -1,19 +1,10 @@
 (ns try-clojerl.repl)
 
 (defn init
-  [_type req _opts]
-  #erl[:ok req nil])
-
-(defn handle
   [req state]
-  (let* [#erl[:ok content req] (cowboy_req/body.e req)
-         result (try (eval (read-string content))
-                     (catch _ e e))
+  (let* [#erl[:ok body req] (cowboy_req/read_body.e req)
+         result (try (eval (read-string body))
+                  (catch _ e e))
          resp-body (pr-str result)
-         #erl[:ok, req] (cowboy_req/reply.e 200 #erl()
-                                            resp-body req)]
+         req (cowboy_req/reply.e 200 #erl{} resp-body req)]
     #erl[:ok req state]))
-
-(defn terminate
-  [reason req state]
-  :ok)

@@ -1,17 +1,8 @@
 (ns try-clojerl.root
-  (:require [try-clojerl.layout :as l]
-            [hiccup.core :as h]))
+  (:require [try-clojerl.layout :as l]))
 
 (defn init
-  [_type req _opts]
-  #erl[:ok req nil])
-
-(defn handle
   [req state]
-  (let* [html (h/html (l/index "Try Clojerl" [:div#terminal]))
-         #erl[:ok, req] (cowboy_req/reply.e 200 #erl() html req)]
+  (let* [html (l/index "Try Clojerl" [:div#terminal])
+         req  (cowboy_req/reply.e 200 #erl{} html req)]
     #erl[:ok req state]))
-
-(defn terminate
-  [reason req state]
-  :ok)
