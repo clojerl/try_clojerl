@@ -15,6 +15,10 @@ var Connection = function(url) {
   };
 };
 
+var callIfNotEmpty = function(value, f) {
+  value && value.trim() != "" && f(value);
+};
+
 var init = function() {
   var url  = "ws://" + window.location.host + "/repl";
   var conn = new Connection(url);
@@ -22,10 +26,10 @@ var init = function() {
     var term = this;
     conn.onmessage = function(message) {
       var json = JSON.parse(message.data);
-      term.set_prompt(json.current_ns);
-      if(json.result) {
-        term.echo(json.result);
-      }
+      callIfNotEmpty(json.stdout, term.echo);
+      callIfNotEmpty(json.stderr, term.error);
+      callIfNotEmpty(json.result, term.echo);
+      term.set_prompt(json.prompt);
     };
   };
 
