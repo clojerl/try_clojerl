@@ -2,6 +2,16 @@
 
 (declare build-reply)
 
+(defn eval-string [s]
+  (with-open [out (erlang.io.StringWriter.)
+              err (erlang.io.StringWriter.)]
+    (binding [*out* out *err* err]
+      (let [res (try (-> s read-string eval pr-str)
+                  (catch _ e
+                    (.write *err* (str "Error: " (pr-str e)))
+                    nil))]
+        #erl[res (str *out*) (str *err*)]))))
+
 (defn init
   [req state]
   ;; :compress should be true once ERL-494 is solved
@@ -14,10 +24,9 @@
   #erl[:reply (build-reply) state])
 
 (defn* websocket_handle [#erl[:text data] state]
-  (let* [json   (jsx/decode.e data #erl(:return_maps))
-         result (try (eval (read-string (get json "cmd")))
-                     (catch _ e e))
-         out-frame (build-reply result)]
+  (let* [json          (jsx/decode.e data #erl(:return_maps))
+         #erl[res out err] (eval-string (get json "cmd"))
+         out-frame     (build-reply res out err)]
     #erl[:reply out-frame state]))
 
 (defn websocket_info [_info state]
@@ -28,8 +37,10 @@
 (defn build-reply
   ([]
    #erl[:text
-        (jsx/encode.e #erl{:current_ns (prompt)})])
-  ([result]
+        (jsx/encode.e #erl{:prompt (prompt)})])
+  ([result out err]
    #erl[:text
-        (jsx/encode.e #erl{:result (pr-str result)
-                           :current_ns (prompt)})]))
+        (jsx/encode.e #erl{:result result
+                           :stdout out
+                           :stderr err
+                           :prompt (prompt)})]))
