@@ -10,7 +10,7 @@
     #erl[:cowboy_websocket req state opts]))
 
 (defn websocket_init [state]
-  (in-ns 'clje.user)
+  (ns clje.user)
   #erl[:reply (build-reply) state])
 
 (defn* websocket_handle [#erl[:text data] state]
