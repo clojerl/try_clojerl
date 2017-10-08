@@ -1,16 +1,6 @@
 (ns try-clojerl.repl)
 
-(declare build-reply)
-
-(defn eval-string [s]
-  (with-open [out (erlang.io.StringWriter.)
-              err (erlang.io.StringWriter.)]
-    (binding [*out* out *err* err]
-      (let [res (try (-> s read-string eval pr-str)
-                  (catch _ e
-                    (.write *err* (str "Error: " (pr-str e)))
-                    nil))]
-        #erl[res (str *out*) (str *err*)]))))
+(declare build-reply eval-string)
 
 (defn init
   [req state]
@@ -32,15 +22,25 @@
 (defn websocket_info [_info state]
   #erl[:ok state])
 
+(defn eval-string [s]
+  (with-open [out (erlang.io.StringWriter.)
+              err (erlang.io.StringWriter.)]
+    (binding [*out* out *err* err]
+      (let [res (try (-> s read-string eval pr-str)
+                  (catch _ e
+                    (.write *err* (str "Error: " (pr-str e)))
+                    ""))]
+        #erl[res (str *out*) (str *err*)]))))
+
 (defn prompt [] (str *ns* "=> "))
 
 (defn build-reply
   ([]
    #erl[:text
         (jsx/encode.e #erl{:prompt (prompt)})])
-  ([result out err]
+  ([res out err]
    #erl[:text
-        (jsx/encode.e #erl{:result result
+        (jsx/encode.e #erl{:result res
                            :stdout out
                            :stderr err
                            :prompt (prompt)})]))
