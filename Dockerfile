@@ -1,13 +1,7 @@
-FROM jfacorro/clojerl:armhf-alpine
+FROM arm32v6/alpine:3.6
 
-# Install build deps
-RUN apk add --no-cache --virtual .try-clojerl-build-deps git make              \
-    # Checkout
-    && git clone --depth 1 https://github.com/clojerl/try_clojerl try_clojerl  \
-    && cd try_clojerl                                                          \
-    && rebar3 clojerl compile                                                  \
-    && rebar3 release                                                          \
-    # Clean deps
-    && apk del .try-clojerl-build-deps
+RUN apk add --update ncurses openssl
 
-ENTRYPOINT /try_clojerl/_build/default/rel/try_clojerl/bin/try_clojerl foreground
+COPY _build/prod/rel/try_clojerl /opt/try_clojerl
+
+ENTRYPOINT /opt/try_clojerl/bin/try_clojerl foreground
