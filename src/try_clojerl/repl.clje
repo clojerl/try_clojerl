@@ -4,7 +4,8 @@
 
 (defn init
   [req state]
-  (let [opts #erl{:compress     true
+  ;; :compress should be true once ERL-494 is solved
+  (let [opts #erl{:compress     false
                   :idle_timeout 600000}]
     #erl[:cowboy_websocket req state opts]))
 
