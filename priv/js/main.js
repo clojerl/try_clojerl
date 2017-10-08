@@ -78,7 +78,6 @@ var oncommand = function(command) {
 var init = function() {
   var options = {
     greetings: 'Welcome to Try Clojerl!',
-    height: '100%',
     prompt: 'clje.user=> ',
     onInit: oninit
   };

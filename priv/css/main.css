@@ -6,6 +6,9 @@ body {
     border-radius: 5px;
     color: #FFF;
     text-shadow: 0 0 10px #FFF;
+    height: 500px;
+    width: 700px;
+    margin: auto;
 }
 
 .prompt {
