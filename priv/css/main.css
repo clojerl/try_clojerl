@@ -12,3 +12,7 @@ body {
     color: #FFF;
     text-shadow: 0 0 10px #FFF;
 }
+
+.error {
+    text-shadow: 0 0 20px #F00;
+}

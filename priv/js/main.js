@@ -1,5 +1,6 @@
 // WebSocket URL
 const URL = "ws://" + window.location.host + "/repl";
+const MAX_ATTEMPTS = 10;
 
 var Connection = function(url) {
   var self = this;
@@ -28,24 +29,36 @@ var callIfNotEmpty = function(value, f) {
 var oninit = function() {
   var self = this;
   self._conn = new Connection(URL);
+
   self._conn.onopen = function(message) {
+    self._attempts = 0;
     self.echo("WebSocket connection established");
   };
+
   self._conn.onmessage = function(message) {
-      var json = JSON.parse(message.data);
-      callIfNotEmpty(json.stdout, self.echo);
-      callIfNotEmpty(json.stderr, self.error);
-      callIfNotEmpty(json.result, self.echo);
-      self.set_prompt(json.prompt);
-    };
+    var json = JSON.parse(message.data);
+    callIfNotEmpty(json.stdout, self.echo);
+    callIfNotEmpty(json.stderr, self.error);
+    callIfNotEmpty(json.result, self.echo);
+    self.set_prompt(json.prompt);
+  };
+
   self._conn.onclose = function() {
-    self.error("WebSocket connection lost, opening a new session...");
-    conn = new Connection(URL);
-    conn.onopen    = self._conn.onopen;
-    conn.onmessage = self._conn.onmessage;
-    conn.onclose   = self._conn.onclose;
-    conn.onerror   = self._conn.onerror;
-    self._conn = conn;
+    if(self._attempts < MAX_ATTEMPTS) {
+      var timeout = Math.pow(2, self._attempts) * 10;
+      self.error("WebSocket connection lost. Trying to reconnect...");
+      setTimeout(function() {
+        self._attempts += 1;
+        var conn       = new Connection(URL);
+        conn.onopen    = self._conn.onopen;
+        conn.onmessage = self._conn.onmessage;
+        conn.onclose   = self._conn.onclose;
+        conn.onerror   = self._conn.onerror;
+        self._conn     = conn;
+      }, timeout);
+    } else {
+      self.error("Maximum reconnection attempts reached");
+    }
   };
 };
 
