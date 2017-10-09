@@ -21,6 +21,7 @@
   {:_ [["/"          :try-clojerl.index nil]
        ["/repl"      :try-clojerl.repl  nil]
        ["/css/[...]" :cowboy_static #erl[:priv_dir :try_clojerl "css"]]
+       ["/img/[...]" :cowboy_static #erl[:priv_dir :try_clojerl "img"]]
        ["/js/[...]"  :cowboy_static #erl[:priv_dir :try_clojerl "js"]]]})
 
 (defn- route->cowboy [[host handlers]]
