@@ -6,13 +6,23 @@ body {
     background-size: cover;
 }
 
+#content {
+    width: 700px;
+    margin: auto;
+}
+
+#content h1 {
+    text-align: center;
+    text-shadow: 0 0 5px #FFF;
+    font-family: Andale Mono, monospace;
+    color: white;
+}
+
 #terminal {
     background:rgba(0, 0, 0, 0.85);
     border-radius: 5px;
     color: #CCC;
     height: 500px;
-    width: 700px;
-    margin: auto;
     font-size: 14px;
 }
 

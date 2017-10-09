@@ -10,9 +10,11 @@
    (include-js "js/jquery.terminal-1.8.0.min.js")
    (include-js "js/main.js")])
 
-(def header [:div#header])
+(def header [:div#header [:h1 "Try Clojerl"]])
+
+(def footer [:div#footer])
 
 (defn index [title content]
   (html5
    (head title)
-   [:body header content]))
+   [:body [:div#content header content footer]]))
