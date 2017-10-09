@@ -14,7 +14,16 @@
 
 (def footer [:div#footer])
 
+(def ribbon-img
+  "https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png")
+
+(def ribbon [:a {:href "https://github.com/clojerl/try_clojerl"}
+                [:img#ribbon {:src ribbon-img
+                              :alt "Fork me on GitHub"}]])
+
 (defn index [title content]
   (html5
    (head title)
-   [:body [:div#content header content footer]]))
+   [:body
+    ribbon
+    [:div#content header content footer]]))

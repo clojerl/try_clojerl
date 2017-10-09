@@ -18,6 +18,13 @@ body {
     color: white;
 }
 
+#ribbon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+}
+
 #terminal {
     background:rgba(0, 0, 0, 0.85);
     border-radius: 5px;
