@@ -1,5 +1,5 @@
 body {
-    background: url(../img/circuit.png) no-repeat center center fixed;
+    background: url(../img/background.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -7,7 +7,7 @@ body {
 }
 
 #terminal {
-    background:rgba(0, 0, 0, 0.92);
+    background:rgba(0, 0, 0, 0.85);
     border-radius: 5px;
     color: #CCC;
     height: 500px;
