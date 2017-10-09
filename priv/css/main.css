@@ -1,18 +1,35 @@
 body {
-    background: url(../img/circuit.png) no-repeat center center fixed;
+    background: url(../img/background.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
 
+#content {
+    width: 700px;
+    margin: auto;
+}
+
+#content h1 {
+    text-align: center;
+    text-shadow: 0 0 5px #FFF;
+    font-family: Andale Mono, monospace;
+    color: white;
+}
+
+#ribbon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+}
+
 #terminal {
-    background:rgba(0, 0, 0, 0.92);
+    background:rgba(0, 0, 0, 0.85);
     border-radius: 5px;
     color: #CCC;
     height: 500px;
-    width: 700px;
-    margin: auto;
     font-size: 14px;
 }
 
