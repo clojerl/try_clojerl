@@ -11,11 +11,28 @@ body {
     margin: auto;
 }
 
-#content h1 {
+#header h1 {
     text-align: center;
     text-shadow: 0 0 5px #FFF;
     font-family: Andale Mono, monospace;
     color: white;
+}
+
+#footer {
+    margin: 10px 0px;
+    text-align: center;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+#footer a {
+    margin: 0px 5px;
+}
+
+a:hover, a:visited, a:link, a:active {
+    color: white;
+    text-decoration: none;
 }
 
 #ribbon {

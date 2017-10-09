@@ -12,7 +12,9 @@
 
 (def header [:div#header [:h1 "Try Clojerl"]])
 
-(def footer [:div#footer])
+(def footer [:div#footer
+             [:a {:href "https://github.com/jfacorro/clojerl"} "Clojerl"]
+             [:a {:href "https://jfacorro.github.io/clojerl/"} "Docs"]])
 
 (def ribbon-img
   "https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png")
