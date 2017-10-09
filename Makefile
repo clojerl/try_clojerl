@@ -1,16 +1,22 @@
-.PHONY: all
+.PHONY: all release clean docker-build docker
 
 BUILD_IMAGE = jfacorro/erlang:20.1.1-armhf-alpine
 DOCKER_REPO = jfacorro/try_clojerl
 DOCKER_TAG  = $(shell git describe --always 2>/dev/null || echo 0)
 
 all:
-	rebar3 clojerl compile
+	@ rebar3 compile
+
+repl: all
+	@ rebar3 clojerl repl
+
+clean:
+	@ rm -rf _build rebar.lock
 
 release: all
-	rebar3 as prod release
+	@ rebar3 as prod release
 
-docker-build:
+docker-build: clean
 	@ docker run -i            \
 		-v ${PWD}:/project \
 		-w /project        \
