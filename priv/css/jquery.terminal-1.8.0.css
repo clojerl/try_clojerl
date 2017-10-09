@@ -413,7 +413,7 @@
         background-color: var(--background, #000);
     }
     .terminal, .cmd, .terminal .terminal-output div div, .cmd .prompt {
-        font-size: calc(var(--size, 1) * 12px);
+        font-size: calc(var(--size, 1) * 14px);
         line-height: calc(var(--size, 1) * 14px);
     }
     .terminal .terminal-output div div {
@@ -473,38 +473,38 @@
     }
     @-webkit-keyframes terminal-blink {
       0%, 100% {
-          background-color: var(--background, #000);
+          background-color: var(--background, transparent);
           color: var(--color, #FFF);
       }
       50% {
           background-color: var(--color, #FFF);
-          color: var(--background, #000);
+          color: var(--background, transparent);
       }
     }
 
     @-ms-keyframes terminal-blink {
       0%, 100% {
-          background-color: var(--background, #000);
+          background-color: var(--background, transparent);
           color: var(--color, #FFF);
       }
       50% {
           background-color: var(--color, #FFF);
-          color: var(--background, #000);
+          color: var(--background, transparent);
       }
     }
     @-moz-keyframes terminal-blink {
       0%, 100% {
-          background-color: var(--background, #000);
+          background-color: var(--background, transparent);
           color: var(--color, #FFF);
       }
       50% {
           background-color: var(--color, #FFF);
-          color: var(--background, #000);
+          color: var(--background, transparent);
       }
     }
     @keyframes terminal-blink {
       0%, 100% {
-          background-color: var(--background, #000);
+          background-color: var(--background, transparent);
           color: var(--color, #FFF);
       }
       50% {
