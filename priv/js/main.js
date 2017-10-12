@@ -22,25 +22,54 @@ var Connection = function(url) {
   };
 };
 
-var callIfNotEmpty = function(value, f) {
+var maybeCall = function(value, f) {
   value && value.trim() != "" && f(value);
 };
 
-var oninit = function() {
+var init = function() {
   var self = this;
   self._conn = new Connection(URL);
+  self._term = $('#terminal').console({
+    welcomeMessage:'Welcome to Try Clojerl!',
+    promptLabel: 'clje.user=> ',
+    commandHandle: function(command) {
+      self.eval(command);
+      // Enable the input since sometimes it
+      // stays disabled
+      self._term.enableInput();
+    },
+    autofocus:true,
+    animateScroll:true,
+    promptHistory:true
+  });
+
+  self.eval = function(command) {
+    if (command.trim() !== '') {
+      var message = {cmd: command};
+      this._conn.send(JSON.stringify(message));
+    }
+  };
+
+  self.print = function(json) {
+    self._term.promptLabel = json.prompt;
+
+    if(json.result || json.stdout || json.stderr) {
+      msgs = [ {msg: json.stdout, className: 'stdout'},
+               {msg: json.stderr, className: 'stderr'},
+               {msg: json.result, className: 'result'}
+             ];
+      self._term.commandResult(msgs);
+    }
+  };
 
   self._conn.onopen = function(message) {
     self._attempts = 0;
-    self.echo("WebSocket connection established");
+    self._term.report("WebSocket connection established");
   };
 
   self._conn.onmessage = function(message) {
     var json = JSON.parse(message.data);
-    callIfNotEmpty(json.stdout, self.echo);
-    callIfNotEmpty(json.stderr, self.error);
-    callIfNotEmpty(json.result, self.echo);
-    self.set_prompt(json.prompt);
+    self.print(json);
   };
 
   self._conn.onclose = function() {
@@ -62,27 +91,4 @@ var oninit = function() {
   };
 };
 
-var oncommand = function(command) {
-  if (command.trim() !== '') {
-    try {
-      var message = {cmd: command};
-      this._conn.send(JSON.stringify(message));
-    } catch(e) {
-      this.error(new String(e));
-    }
-  } else {
-    this.echo('');
-  }
-};
-
-var init = function() {
-  var options = {
-    greetings: 'Welcome to Try Clojerl!',
-    prompt: 'clje.user=> ',
-    onInit: oninit
-  };
-
-  $('#terminal').terminal(oncommand, options);
-};
-
-$(function($, undefined) { init(); });
+$(function() { init(); });

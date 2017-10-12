@@ -5,9 +5,8 @@
   [:head
    [:title title]
    (include-css "css/main.css")
-   (include-css "css/jquery.terminal-1.8.0.css")
    (include-js "js/jquery-1.7.1.min.js")
-   (include-js "js/jquery.terminal-1.8.0.min.js")
+   (include-js "js/jquery.console.js")
    (include-js "js/main.js")])
 
 (def header [:div#header [:h1 "Try Clojerl"]])

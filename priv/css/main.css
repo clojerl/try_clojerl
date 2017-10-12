@@ -48,21 +48,35 @@ a:hover, a:visited, a:link, a:active {
     color: #CCC;
     height: 500px;
     font-size: 14px;
+    font-family:monospace;
+    padding: 10px;
 }
 
-div.cmd {
-    background-color: transparent;
+#terminal div.jquery-console-inner {
+    height: 500px;
+    overflow:auto;
 }
 
-div.prompt {
-    color: #FFF;
+#terminal div.jquery-console-prompt-box {
+    color:#FFF;
     text-shadow: 0 0 10px #FFF;
 }
 
-div.terminal-output {
-    color: #0FF;
+#terminal div.jquery-console-focus span.jquery-console-cursor {
+    background:#FEFEFE; color:#333; font-weight:bold
 }
 
-div.command {
-    color: #CCC;
+#terminal div.stdout {
+    color: #FF0;
+    font-family: monospace;
+}
+
+#terminal div.stderr {
+    color: #ef0505;
+    font-family: monospace;
+}
+
+#terminal div.result {
+    color: #0FF;
+    font-family: monospace;
 }
