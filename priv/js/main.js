@@ -32,6 +32,9 @@ var init = function() {
   self._term = $('#terminal').console({
     welcomeMessage:'Welcome to Try Clojerl!',
     promptLabel: 'clje.user=> ',
+    commandValidate: function(command) {
+      return true;
+    },
     commandHandle: function(command) {
       self.eval(command);
       // Enable the input since sometimes it
@@ -47,6 +50,8 @@ var init = function() {
     if (command.trim() !== '') {
       var message = {cmd: command};
       this._conn.send(JSON.stringify(message));
+    } else {
+      this._term.commandResult();
     }
   };
 
