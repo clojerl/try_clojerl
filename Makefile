@@ -2,7 +2,7 @@
 
 BUILD_IMAGE = jfacorro/erlang:20.1.1-armhf-alpine
 DOCKER_REPO = jfacorro/try_clojerl
-DOCKER_TAG  = $(shell git describe --always 2>/dev/null || echo 0)
+DOCKER_TAG  = $(shell git describe --tags --always 2>/dev/null || echo 0)
 
 all:
 	@ rebar3 compile
