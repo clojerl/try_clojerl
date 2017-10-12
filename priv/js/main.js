@@ -46,12 +46,16 @@ var init = function() {
     promptHistory:true
   });
 
+  self.error = function(message) {
+    self._term.commandResult([{msg: message, className: 'stderr'}]);
+  };
+
   self.eval = function(command) {
     if (command.trim() !== '') {
       var message = {cmd: command};
-      this._conn.send(JSON.stringify(message));
+      self._conn.send(JSON.stringify(message));
     } else {
-      this._term.commandResult();
+      self._term.commandResult();
     }
   };
 
