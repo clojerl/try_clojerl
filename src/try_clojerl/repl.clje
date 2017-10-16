@@ -10,13 +10,22 @@
     #erl[:cowboy_websocket req state opts]))
 
 (defn websocket_init [state]
-  (ns clje.user)
-  #erl[:reply (build-reply) state])
+  (ns clje.user
+    (:require [clojure.repl :refer (source apropos dir pst doc find-doc)]
+              [clojure.pprint :refer (pp pprint)]))
+  (let [erlang-version  (-> :system_version
+                            erlang/system_info.e
+                            erlang/list_to_binary.e)
+        message         (str erlang-version (clojure-version))
+        reply           (build-reply :message message)]
+    #erl[:reply reply state]))
 
 (defn* websocket_handle [#erl[:text data] state]
   (let* [json          (jsx/decode.e data #erl(:return_maps))
          #erl[res out err] (eval-string (get json "cmd"))
-         out-frame     (build-reply res out err)]
+         out-frame     (build-reply :result res
+                                    :stdout out
+                                    :stderr err)]
     #erl[:reply out-frame state]))
 
 (defn websocket_info [_info state]
@@ -35,12 +44,7 @@
 (defn prompt [] (str *ns* "=> "))
 
 (defn build-reply
-  ([]
-   #erl[:text
-        (jsx/encode.e #erl{:prompt (prompt)})])
-  ([res out err]
-   #erl[:text
-        (jsx/encode.e #erl{:result res
-                           :stdout out
-                           :stderr err
-                           :prompt (prompt)})]))
+  [& keyvals]
+  #erl[:text
+       (jsx/encode.e (merge #erl{:prompt (prompt)}
+                            (apply hash-map keyvals)))])
