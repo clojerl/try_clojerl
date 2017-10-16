@@ -63,19 +63,8 @@ a:hover, a:visited, a:link, a:active {
 }
 
 #terminal div span.jquery-console-cursor {
-    background:#FEFEFE;
-    -webkit-animation: blink 1s step-end infinite;
-    animation: blink 1s step-end infinite;
-}
-
-@-webkit-keyframes blink {
-  0%, 100% { background-color: transparent; }
-  50% { background-color: #FEFEFE; }
-}
-
-@keyframes blink {
-  0%, 100% { background-color: transparent; }
-  50% { background-color: #FEFEFE; }
+    background:#EEE;
+    color: #000;
 }
 
 #terminal div.stdout {
