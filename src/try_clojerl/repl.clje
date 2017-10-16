@@ -16,7 +16,8 @@
   (let [erlang-version  (-> :system_version
                             erlang/system_info.e
                             erlang/list_to_binary.e)
-        message         (str erlang-version (clojure-version))
+        clojerl-version (str "Clojerl " (clojure-version))
+        message         (str erlang-version clojerl-version)
         reply           (build-reply :message message)]
     #erl[:reply reply state]))
 
