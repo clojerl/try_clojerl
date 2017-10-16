@@ -22,15 +22,11 @@ var Connection = function(url) {
   };
 };
 
-var maybeCall = function(value, f) {
-  value && value.trim() != "" && f(value);
-};
-
 var init = function() {
   var self = this;
   self._conn = new Connection(URL);
   self._term = $('#terminal').console({
-    welcomeMessage:'Welcome to Try Clojerl!',
+    welcomeMessage: 'Welcome to Try Clojerl!',
     promptLabel: 'clje.user=> ',
     commandValidate: function(command) {
       return true;
@@ -61,6 +57,7 @@ var init = function() {
 
   self.print = function(json) {
     self._term.promptLabel = json.prompt;
+    self._term.report(json.message, 'stdout');
 
     if(json.result || json.stdout || json.stderr) {
       msgs = [ {msg: json.stdout, className: 'stdout'},
