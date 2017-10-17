@@ -10,6 +10,7 @@
     #erl[:cowboy_websocket req state opts]))
 
 (defn websocket_init [state]
+  (lager/log.e :info (erlang/self.e) "REPL process started")
   (ns clje.user
     (:require [clojure.repl :refer (source apropos dir pst doc find-doc)]
               [clojure.pprint :refer (pp pprint)]))
@@ -31,6 +32,12 @@
 
 (defn websocket_info [_info state]
   #erl[:ok state])
+
+(defn terminate [reason _ state]
+  (lager/log.e :info
+               (erlang/self.e)
+               "REPL process terminated: ~p" #erl(reason))
+  :ok)
 
 (defn eval-string [s]
   (with-open [out (erlang.io.StringWriter.)

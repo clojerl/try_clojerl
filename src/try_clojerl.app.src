@@ -9,6 +9,7 @@
       , clojerl
       , hiccup
       , jsx
+      , lager
       ]
     }
   , {mod, {'try-clojerl.app', []}}
