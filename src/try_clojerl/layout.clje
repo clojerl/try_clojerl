@@ -1,5 +1,6 @@
 (ns try-clojerl.layout
-  (:require [hiccup.page :refer [html5 include-css include-js]]))
+  (:require [hiccup.page :refer [html5 include-css include-js]]
+            [hiccup.element :refer [link-to]]))
 
 (defn head [title]
   [:head
@@ -9,22 +10,72 @@
    (include-js "js/jquery.console.js")
    (include-js "js/main.js")])
 
+(def clojerl-url "https://github.com/jfacorro/clojerl")
+(def clojure-url "http://clojure.org")
+(def erlang-url  "http://erlang.org")
+
 (def header [:div#header [:h1 "Try Clojerl"]])
 
 (def footer [:div#footer
-             [:a {:href "https://github.com/jfacorro/clojerl"} "Clojerl"]
-             [:a {:href "https://jfacorro.github.io/clojerl/"} "Docs"]])
+             (link-to "/" "Home")
+             (link-to "/about" "About")
+             (link-to clojerl-url "Clojerl")])
 
 (def ribbon-img
   "https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png")
 
-(def ribbon [:a {:href "https://github.com/clojerl/try_clojerl"}
-                [:img#ribbon {:src ribbon-img
-                              :alt "Fork me on GitHub"}]])
+(def ribbon (link-to "https://github.com/clojerl/try_clojerl"
+                     [:img#ribbon {:src ribbon-img
+                                   :alt "Fork me on GitHub"}]))
 
-(defn index [title content]
+(def index [:div#terminal])
+
+(def about
+  [:div#about
+   [:h3 "About"]
+   [:p (link-to clojerl-url "Clojerl") " is an experimental implementation of "
+    (link-to clojure-url "Clojure") " on the "
+    (link-to erlang-url "Erlang VM") ". "]
+   [:p " This site lets you interact with a Clojerl console called a REPL, which
+stands for Read-Eval-Print-Loop. This is because by using this console you can
+write a Clojerl expression that will get Read, Evaluated and its result Printed.
+Then it Loops back to the beginning where you will be asked for another
+expression."]
+   [:p "The Try Clojerl site was built using Clojerl itself. You can check the
+source on GitHub by following the link on the ribbon in the top-right corner."]
+   [:p "Enjoy!"]
+
+   [:h4 "Some Technical Comments"]
+   [:p "This is currently being hosted on a Raspberry PI 3 and running
+on a docker container. The user inside the docker container which runs the
+Erlang VM process can't do much since it's not root or a sudoer."]
+   [:p "If the REPL is idle for 10 minutes the connection times out and a new
+connection is established."]
+   [:p "There's currently no sandboxing, so you can do almost anything that you
+would be able to do in a local REPL. Be nice."]
+   [:p " If the Erlang VM gets killed somehow (e.g. by calling "
+    [:code "(erlang/halt)"] ") the docker container will restart on its own. All
+connected clients will see their connections closed and each will try to open a
+new connection."]
+   [:p "It would be pretty nice testing the limit of how many clients this setup
+can handle at the same."]])
+
+(def pages
+  {:index {:title   "Try Clojerl"
+           :content index}
+   :about {:title   "Try Clojerl - About"
+           :content about}})
+
+(defn page [title content]
   (html5
    (head title)
    [:body
     ribbon
     [:div#content header content footer]]))
+
+(defn init
+  [req page-id]
+  (let* [data (pages page-id)
+         html (page (:title data) (:content data))
+         req  (cowboy_req/reply.e 200 #erl{} html req)]
+    #erl[:ok req page-id]))

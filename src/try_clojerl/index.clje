@@ -1,8 +1,0 @@
-(ns try-clojerl.index
-  (:require [try-clojerl.layout :as l]))
-
-(defn init
-  [req state]
-  (let* [html (l/index "Try Clojerl" [:div#terminal])
-         req  (cowboy_req/reply.e 200 #erl{} html req)]
-    #erl[:ok req state]))
