@@ -1,4 +1,5 @@
-(ns try-clojerl.repl)
+(ns try-clojerl.repl
+  (:require [try-clojerl.clients :as c]))
 
 (declare build-reply eval-string)
 
@@ -11,6 +12,7 @@
 
 (defn websocket_init [state]
   (lager/log.e :info (erlang/self.e) "REPL process started")
+  (c/add (erlang/self.e))
   (ns clje.user
     (:require [clojure.repl :refer (source apropos dir pst doc find-doc)]
               [clojure.pprint :refer (pp pprint)]))
@@ -30,10 +32,15 @@
                                     :stderr err)]
     #erl[:reply out-frame state]))
 
-(defn websocket_info [_info state]
-  #erl[:ok state])
+(defn* websocket_info
+  ([#erl[:client-count c] state]
+   (let [out-frame (build-reply :client_count c)]
+     #erl[:reply out-frame state]))
+  ([_info state]
+   #erl[:ok state]))
 
 (defn terminate [reason _ state]
+  (c/remove (erlang/self.e))
   (lager/log.e :info
                (erlang/self.e)
                "REPL process terminated: ~p" #erl(reason))

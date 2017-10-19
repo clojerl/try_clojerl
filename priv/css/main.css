@@ -47,7 +47,7 @@ a:hover {
     border: 0;
 }
 
-#terminal, #about {
+#terminal, #about, #client-count {
     background:rgba(0, 0, 0, 0.85);
     border-radius: 5px;
     padding: 10px;
@@ -59,6 +59,16 @@ a:hover {
     font-size: 1em;
     color: white;
     text-align: justify;
+}
+
+#client-count {
+    float: right;
+    position: relative;
+    padding: 5px;
+    top: -30px;
+    font-family:monospace;
+    font-size: 14px;
+    color: white;
 }
 
 #terminal {
