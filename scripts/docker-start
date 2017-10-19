@@ -1,0 +1,12 @@
+#!/bin/bash
+
+LOGDIR=/var/log/try_clojerl
+
+mkdir -p $LOGDIR
+
+docker run -d                    \
+        --restart unless-stopped \
+        --name=try_clojerl       \
+        -v $LOGDIR:$LOGDIR       \
+        -p 8080:8080             \
+        jfacorro/try_clojerl:latest

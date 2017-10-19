@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker stop try_clojerl
+docker rm try_clojerl

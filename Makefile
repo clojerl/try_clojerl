@@ -24,3 +24,14 @@ docker-build: clean
 
 docker: docker-build
 	@ docker build -t ${DOCKER_REPO}:${DOCKER_TAG} .
+
+publish:
+	@ docker tag ${DOCKER_REPO}:${DOCKER_TAG} ${DOCKER_REPO}:latest
+	@ docker push ${DOCKER_REPO}:${DOCKER_TAG}
+	@ docker push ${DOCKER_REPO}:latest
+
+docker-stop:
+	@ sudo scripts/docker-stop
+
+docker-start:
+	@ sudo scripts/docker-start
