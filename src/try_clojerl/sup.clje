@@ -1,13 +1,19 @@
 (ns try-clojerl.sup)
 
+(def sup-flags #erl{:strategy  :one_for_one
+                    :intensity 1
+                    :period    5})
+
+(def child-specs #erl(#erl{:id :try-clojerl.clients
+                           :start #erl[:try-clojerl.clients
+                                       :start-link
+                                       #erl()]
+                           :restart :permanent}))
+
 (defn start-link []
   (supervisor/start_link.e #erl[:local :try-clojerl.sup]
                            :try-clojerl.sup
                            #erl()))
 
 (defn init [args]
-  (let [sup-flags   #erl{:strategy :one_for_one
-                         :intensity 1
-                         :period 5}
-        child-specs #erl()]
-    #erl[:ok #erl[sup-flags child-specs]]))
+  #erl[:ok #erl[sup-flags child-specs]])

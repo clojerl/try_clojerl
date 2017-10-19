@@ -42,6 +42,12 @@ var init = function() {
     promptHistory:true
   });
 
+  self.clientCount = function(count) {
+    if(count) {
+      $('#client-count').text(count + " clients");
+    }
+  };
+
   self.error = function(message) {
     self._term.commandResult([{msg: message, className: 'stderr'}]);
   };
@@ -58,6 +64,7 @@ var init = function() {
   self.print = function(json) {
     self._term.promptLabel = json.prompt;
     self._term.report(json.message, 'stdout');
+    self.clientCount(json.client_count);
 
     if(json.result || json.stdout || json.stderr) {
       msgs = [ {msg: json.stdout, className: 'stdout'},
