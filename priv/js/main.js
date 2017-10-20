@@ -44,7 +44,8 @@ var init = function() {
 
   self.clientCount = function(count) {
     if(count) {
-      $('#client-count').text(count + " clients");
+      var label = count + " " + (count === 1? "client" : "clients");
+      $('#client-count').text(label);
     }
   };
 
