@@ -63,12 +63,13 @@ a:hover {
 
 #client-count {
     float: right;
-    position: relative;
+    background:rgba(0, 0, 0, 0.5);
+    margin-top: 5px;
     padding: 5px;
-    top: -30px;
     font-family:monospace;
     font-size: 14px;
     color: white;
+    text-shadow: 0 0 10px #FFF;
 }
 
 #terminal {
@@ -79,8 +80,9 @@ a:hover {
 }
 
 #terminal div.jquery-console-inner {
+    word-wrap: break-word;
     height: 500px;
-    overflow:auto;
+    overflow-y: auto;
 }
 
 #terminal div.jquery-console-prompt-box {

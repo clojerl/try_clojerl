@@ -28,8 +28,8 @@
                      [:img#ribbon {:src ribbon-img
                                    :alt "Fork me on GitHub"}]))
 
-(def index [:div [:div#client-count]
-                 [:div#terminal]])
+(def index [:div [:div#terminal]
+                 [:div#client-count]])
 
 (def about
   [:div#about
