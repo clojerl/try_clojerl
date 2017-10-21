@@ -105,4 +105,8 @@ var init = function() {
   };
 };
 
-$(function() { init(); });
+$(function() {
+  if($('#terminal').length) {
+    init();
+  }
+});
