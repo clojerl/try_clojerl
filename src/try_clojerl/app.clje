@@ -6,7 +6,7 @@
 (defn start [type args]
   (start-cowboy)
   (sup/start-link)
-  #erl[:ok (erlang/self.e)])
+  #erl[:ok (erlang/self)])
 
 (defn stop [state]
   state)
@@ -30,7 +30,7 @@
 
 (defn start-cowboy []
   (let [routes (->list (map route->cowboy routes))
-        dispatch (cowboy_router/compile.e routes)
+        dispatch (cowboy_router/compile routes)
         transport-opts (->proplist {:port 8080})
         protocol-opts #erl{:env #erl{:dispatch dispatch}}]
-    (cowboy/start_clear.e :try-clojerl.listener transport-opts protocol-opts)))
+    (cowboy/start_clear :try-clojerl.listener transport-opts protocol-opts)))

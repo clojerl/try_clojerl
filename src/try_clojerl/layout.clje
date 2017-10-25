@@ -78,5 +78,5 @@ can handle at the same."]])
   [req page-id]
   (let* [data (pages page-id)
          html (page (:title data) (:content data))
-         req  (cowboy_req/reply.e 200 #erl{} html req)]
+         req  (cowboy_req/reply 200 #erl{} html req)]
     #erl[:ok req page-id]))

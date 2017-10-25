@@ -11,9 +11,9 @@
                            :restart :permanent}))
 
 (defn start-link []
-  (supervisor/start_link.e #erl[:local :try-clojerl.sup]
-                           :try-clojerl.sup
-                           #erl()))
+  (supervisor/start_link #erl[:local :try-clojerl.sup]
+                         :try-clojerl.sup
+                         #erl()))
 
 (defn init [args]
   #erl[:ok #erl[sup-flags child-specs]])

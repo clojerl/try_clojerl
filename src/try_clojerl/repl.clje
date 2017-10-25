@@ -11,21 +11,21 @@
     #erl[:cowboy_websocket req state opts]))
 
 (defn websocket_init [state]
-  (lager/log.e :info (erlang/self.e) "REPL process started")
-  (c/add (erlang/self.e))
-  (ns clje.user
-    (:require [clojure.repl :refer (source apropos dir pst doc find-doc)]
-              [clojure.pprint :refer (pp pprint)]))
+  (lager/log :info (erlang/self) "REPL process started")
+  (c/add (erlang/self))
+  (ns clje.user)
+  #_(:require [clojure.repl :refer (source apropos dir pst doc find-doc)]
+            [clojure.pprint :refer (pp pprint)])
   (let [erlang-version  (-> :system_version
-                            erlang/system_info.e
-                            erlang/list_to_binary.e)
+                            erlang/system_info
+                            erlang/list_to_binary)
         clojerl-version (str "Clojerl " (clojure-version))
         message         (str erlang-version clojerl-version)
         reply           (build-reply :message message)]
     #erl[:reply reply state]))
 
 (defn* websocket_handle [#erl[:text data] state]
-  (let* [json          (jsx/decode.e data #erl(:return_maps))
+  (let* [json          (jsx/decode data #erl(:return_maps))
          #erl[res out err] (eval-string (get json "cmd"))
          out-frame     (build-reply :result res
                                     :stdout out
@@ -40,9 +40,9 @@
    #erl[:ok state]))
 
 (defn terminate [reason _ state]
-  (c/remove (erlang/self.e))
-  (lager/log.e :info
-               (erlang/self.e)
+  (c/remove (erlang/self))
+  (lager/log :info
+               (erlang/self)
                "REPL process terminated: ~p" #erl(reason))
   :ok)
 
@@ -61,5 +61,5 @@
 (defn build-reply
   [& keyvals]
   #erl[:text
-       (jsx/encode.e (merge #erl{:prompt (prompt)}
+       (jsx/encode (merge #erl{:prompt (prompt)}
                             (apply hash-map keyvals)))])

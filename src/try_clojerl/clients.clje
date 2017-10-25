@@ -1,24 +1,25 @@
-(ns try-clojerl.clients)
+(ns try-clojerl.clients
+  (:refer-clojure :exclude [remove]))
 
 (defn all []
-  (gen_server/call.e :try-clojerl.clients :all))
+  (gen_server/call :try-clojerl.clients :all))
 
 (defn add [pid]
-  (gen_server/call.e :try-clojerl.clients #erl[:add pid]))
+  (gen_server/call :try-clojerl.clients #erl[:add pid]))
 
 (defn remove [pid]
-  (gen_server/call.e :try-clojerl.clients #erl[:remove pid]))
+  (gen_server/call :try-clojerl.clients #erl[:remove pid]))
 
 (declare all-clients report-client-count)
 
 (defn start-link []
-  (gen_server/start_link.e #erl[:local :try-clojerl.clients]
+  (gen_server/start_link #erl[:local :try-clojerl.clients]
                            :try-clojerl.clients
                            #erl()
                            #erl()))
 
 (defn init [_]
-  (ets/new.e :try-clojerl.clients
+  (ets/new :try-clojerl.clients
              #erl(:set :protected :named_table))
   #erl[:ok nil])
 
@@ -26,11 +27,11 @@
   ([:all from state]
    #erl[:reply (all-clients) state])
   ([#erl[:add pid] from state]
-   (ets/insert.e :try-clojerl.clients #erl[pid])
+   (ets/insert :try-clojerl.clients #erl[pid])
    (report-client-count)
    #erl[:reply nil state])
   ([#erl[:remove pid] from state]
-   (ets/delete.e :try-clojerl.clients pid)
+   (ets/delete :try-clojerl.clients pid)
    (report-client-count)
    #erl[:reply nil state]))
 
@@ -41,9 +42,9 @@
   (let [clients (all-clients)
         c (count clients)]
     (doseq [x clients]
-      (erlang/send.e x #erl[:client-count c]))))
+      (erlang/send x #erl[:client-count c]))))
 
 (defn- all-clients []
   (->> :try-clojerl.clients
-       ets/tab2list.e
+       ets/tab2list
        (map first)))
