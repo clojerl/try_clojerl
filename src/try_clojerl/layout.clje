@@ -2,13 +2,23 @@
   (:require [hiccup.page :refer [html5 include-css include-js]]
             [hiccup.element :refer [link-to]]))
 
+(def google-analytics
+  (list [:script {:async "true"
+                  :src "https://www.googletagmanager.com/gtag/js?id=UA-108806184-1"}]
+        [:script "  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-108806184-1');"]))
+
 (defn head [title]
   [:head
+   google-analytics
    [:title title]
    (include-css "css/main.css")
-   (include-js "js/jquery-1.7.1.min.js")
-   (include-js "js/jquery.console.js")
-   (include-js "js/main.js")])
+   (include-js "js/jquery-1.7.1.min.js"
+               "js/jquery.console.js"
+               "js/main.js")])
 
 (def clojerl-url "https://github.com/jfacorro/clojerl")
 (def clojure-url "http://clojure.org")
