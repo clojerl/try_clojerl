@@ -57,7 +57,7 @@ source on GitHub by following the link on the ribbon in the top-right corner."]
    [:p "Enjoy!"]
 
    [:h4 "Some Technical Comments"]
-   [:p "This is currently being hosted on a Raspberry PI 3 and running
+   [:p "This is currently being hosted on a Linode VM and running
 on a docker container. The user inside the docker container which runs the
 Erlang VM process can't do much since it's not root or a sudoer."]
    [:p "If the REPL is idle for 10 minutes the connection times out and a new
