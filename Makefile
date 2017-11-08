@@ -31,7 +31,7 @@ publish:
 	@ docker push ${DOCKER_REPO}:latest
 
 docker-stop:
-	@ sudo scripts/docker-stop
+	@ scripts/docker-stop
 
 docker-start:
-	@ sudo scripts/docker-start
+	@ scripts/docker-start
