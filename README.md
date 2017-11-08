@@ -18,6 +18,6 @@ Start Web Application
     (...)
     ===> Clojerl Compiling try_clojerl
     Clojure 0.0.0-1263.7db08a5
-    clje.user=> (application/ensure_all_started.e :try_clojerl)
+    clje.user=> (application/ensure_all_started :try_clojerl)
 
 Then visit http://localhost:8080/.
