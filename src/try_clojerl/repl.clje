@@ -42,11 +42,12 @@
 (defn terminate [reason _ state]
   (c/remove (erlang/self))
   (lager/log :info
-               (erlang/self)
-               "REPL process terminated: ~p" #erl(reason))
+             (erlang/self)
+             "REPL process terminated: ~p" #erl(reason))
   :ok)
 
 (defn eval-string [s]
+  (lager/log :info (erlang/self) "Eval: ~s" #erl(s))
   (with-open [out (erlang.io.StringWriter.)
               err (erlang.io.StringWriter.)]
     (binding [*out* out *err* err]
