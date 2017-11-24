@@ -1,7 +1,7 @@
 (ns try-clojerl.repl
   (:require [try-clojerl.clients :as c]))
 
-(declare build-reply eval-string)
+(declare build-reply eval-string init-repl)
 
 (defn init
   [req state]
@@ -13,9 +13,7 @@
 (defn websocket_init [state]
   (lager/log :info (erlang/self) "REPL process started")
   (c/add (erlang/self))
-  (ns clje.user)
-  #_(:require [clojure.repl :refer (source apropos dir pst doc find-doc)]
-            [clojure.pprint :refer (pp pprint)])
+  (init-repl)
   (let [erlang-version  (-> :system_version
                             erlang/system_info
                             erlang/list_to_binary)
@@ -45,6 +43,11 @@
              (erlang/self)
              "REPL process terminated: ~p" #erl(reason))
   :ok)
+
+(defn init-repl []
+  (ns clje.user
+    (:require [clojure.repl :refer (source apropos dir pst doc find-doc)]
+              [clojure.pprint :refer (pp pprint)])))
 
 (defn eval-string [s]
   (lager/log :info (erlang/self) "Eval: ~s" #erl(s))
