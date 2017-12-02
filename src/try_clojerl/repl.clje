@@ -45,9 +45,13 @@
   :ok)
 
 (defn init-repl []
-  (ns clje.user
-    (:require [clojure.repl :refer (source apropos dir pst doc find-doc)]
-              [clojure.pprint :refer (pp pprint)])))
+  (let [ns-name (->> (erlang/unique_integer #erl(:positive))
+                     (str "clje.user-")
+                     symbol)]
+    (in-ns ns-name)
+    (refer-clojure)
+    (require '[clojure.repl :refer (source apropos dir pst doc find-doc)])
+    (require '[clojure.pprint :refer (pp pprint)])))
 
 (defn eval-string [s]
   (lager/log :info (erlang/self) "Eval: ~s" #erl(s))
