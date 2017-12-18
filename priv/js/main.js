@@ -67,11 +67,14 @@ var init = function() {
     self._term.report(json.message, 'stdout');
     self.clientCount(json.client_count);
 
-    if(json.result || json.stdout || json.stderr) {
-      msgs = [ {msg: json.stdout, className: 'stdout'},
-               {msg: json.stderr, className: 'stderr'},
-               {msg: json.result, className: 'result'}
-             ];
+    if( json.result != undefined ||
+        json.stdout != undefined ||
+        json.stderr != undefined
+      ) {
+      var msgs = [ {msg: json.stdout, className: 'stdout'},
+                   {msg: json.stderr, className: 'stderr'},
+                   {msg: json.result, className: 'result'}
+                 ];
       self._term.commandResult(msgs);
     }
   };
