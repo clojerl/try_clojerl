@@ -67,7 +67,7 @@
                     "")
                   (finally
                     (erlang/group_leader group-leader (erlang/self))))]
-        #erl[res (str *out* (ct/capture_get)) (str *err*)]))))
+        #erl[res (str *out*) (str *err*)]))))
 
 (defn prompt [] (str *ns* "=> "))
 
