@@ -1,23 +1,51 @@
 (ns try-clojerl.tutorial)
 
-(def help-text
-  "While in the REPL you can evaluate any Clojerl expression.
+(def ^:dynamic *current-step*)
 
-Some useful functions to explore what is available and what
-each function does are the following:
+(def steps
+  ["page1.html"
+   "page2.html"
+   "page3.html"
+   "page4.html"
+   "page5.html"
+   "page6.html"
+   "page7.html"
+   "page8.html"
+   "page9.html"
+   "page10.html"
+   "end.html"])
 
-doc:      prints the documentation string for the provided
-          function (e.g. try evaluating '(doc doc)')
+(defn init []
+  (push-thread-bindings {#'*current-step* nil}))
 
-find-doc: searches for the text in the documentation string
-          of available functions and lists them.
-          (e.g. '(find-doc \"distinct\")')
+(defn slurp-html [filename]
+  (let [priv-dir (code/priv_dir :try_clojerl)
+        path (str priv-dir "/html/" filename)]
+    (slurp path)))
 
-apropos:  shows all functions whose names contains the string
-          provided (e.g. '(apropos \"inc\")')")
+(defn show-step
+  ([] (show-step *current-step*))
+  ([n]
+   (-> (steps n)
+       slurp-html
+       print)))
 
 (defn help []
-  (println help-text))
+  (println (slurp-html "help.html")))
 
 (defn start []
-  (println "Numbers"))
+  (set! *current-step* 0)
+  (show-step))
+
+(defn next-step []
+  (when (< *current-step* (dec (count steps)))
+    (set! *current-step* (inc *current-step*)))
+  (show-step))
+
+(defn prev-step []
+  (when (< 0 *current-step*)
+    (set! *current-step* (dec *current-step*)))
+  (show-step))
+
+(defn restart []
+  (start))

@@ -95,17 +95,26 @@ a:hover {
     color: #000;
 }
 
-#terminal div.stdout {
+#terminal .stdout {
     color: #FF0;
     font-family: monospace;
 }
 
-#terminal div.stderr {
+#terminal .stderr {
     color: #ef0505;
     font-family: monospace;
 }
 
-#terminal div.result {
+#terminal .result {
     color: #0FF;
     font-family: monospace;
+}
+
+pre {
+    margin: 0px;
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }

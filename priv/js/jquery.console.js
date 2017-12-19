@@ -589,11 +589,13 @@
     ////////////////////////////////////////////////////////////////////////
     // Display a message
     function message(msg,className) {
-      var mesg = $('<div class="jquery-console-message"></div>');
-      if (className) mesg.addClass(className);
-      mesg.filledText(msg).hide();
-      inner.append(mesg);
-      mesg.show();
+      if(msg.trim() != "") {
+        var mesg = $('<pre class="jquery-console-message"/>');
+        if (className) mesg.addClass(className);
+        mesg.filledText(msg).hide();
+        inner.append(mesg);
+        mesg.show();
+      }
     };
 
     ////////////////////////////////////////////////////////////////////////
