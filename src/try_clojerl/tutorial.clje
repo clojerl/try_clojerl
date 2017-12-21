@@ -32,9 +32,10 @@
   ([] (show-step *step*))
   ([n]
    (if *tutorial*
-     (-> (steps n)
-         slurp-html
-         print)
+     (->> (steps n)
+          (str (name *tutorial*) "/")
+          slurp-html
+          print)
      (println "No tutorial started"))))
 
 (defn print-list []
