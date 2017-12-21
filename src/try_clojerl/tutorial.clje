@@ -5,7 +5,7 @@
 
 (def tutorials
   {:basic-intro
-   {:desc  "Basic introduction to Clojure"
+   {:desc  "Basic introduction to Clojure (taken from tryclj.com)"
     :pages [{:name "page1.html"}
             {:name "page2.html" :expr "(+ 3 3)"}
             {:name "page3.html" :expr "(/ 10 3)"}
@@ -64,6 +64,15 @@
   (when (and *step* (< 0 *step*))
     (set! *step* (dec *step*)))
   (show-step))
+
+(defn check-expr? [s]
+  (when (and *tutorial*
+             (-> (tutorials *tutorial*)
+                 :pages
+                 (get *step*)
+                 :expr
+                 (= s)))
+    (next-step)))
 
 (defn restart []
   (start))

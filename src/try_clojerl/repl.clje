@@ -4,19 +4,6 @@
 
 (declare build-reply eval-string init-repl)
 
-(def welcome "
------------------------
-Welcome to Try Clojerl!
------------------------
-
-This is a web console where you can try out the language.
-
-If you want to start with the default tutorial just type `(tutorial/start)`.
-
-Or if you would like to get some help enter `(tutorial/help)`.
-
-")
-
 (defn init
   [req state]
   ;; :compress should be true once ERL-494 is solved
@@ -34,7 +21,7 @@ Or if you would like to get some help enter `(tutorial/help)`.
         clojerl-version (str "Clojerl " (clojure-version))
         message         (str erlang-version
                              clojerl-version "\n"
-                             welcome)
+                             (tutorial/slurp-html "welcome.html"))
         reply           (build-reply :message message)]
     #erl[:reply reply state]))
 
@@ -85,6 +72,7 @@ Or if you would like to get some help enter `(tutorial/help)`.
                     "")
                   (finally
                     (erlang/group_leader group-leader (erlang/self))))]
+        (tutorial/check-expr? s)
         #erl[res (str *out*) (str *err*)]))))
 
 (defn prompt [] (str *ns* "=> "))
