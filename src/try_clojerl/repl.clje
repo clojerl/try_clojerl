@@ -9,9 +9,11 @@
 Welcome to Try Clojerl!
 -----------------------
 
-If you want to start with the tutorial just type `(start)`.
+This is a web console where you can try out the language.
 
-To get some general help about the REPL and how to move around type `(help)`.
+If you want to start with the default tutorial just type `(tutorial/start)`.
+
+Or if you would like to get some help enter `(tutorial/help)`.
 
 ")
 
@@ -66,7 +68,7 @@ To get some general help about the REPL and how to move around type `(help)`.
     (refer-clojure)
     (require '[clojure.repl :refer (source apropos dir pst doc find-doc)])
     (require '[clojure.pprint :refer (pp pprint)])
-    (use 'try-clojerl.tutorial)
+    (require '[try-clojerl.tutorial :as tutorial :refer (next-step prev-step)])
     (tutorial/init)))
 
 (defn eval-string [s]

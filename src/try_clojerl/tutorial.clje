@@ -1,6 +1,6 @@
 (ns try-clojerl.tutorial)
 
-(def ^:dynamic *current-step*)
+(def ^:dynamic *current-step* nil)
 
 (def steps
   ["page1.html"
@@ -26,9 +26,11 @@
 (defn show-step
   ([] (show-step *current-step*))
   ([n]
-   (-> (steps n)
-       slurp-html
-       print)))
+   (if *current-step*
+     (-> (steps n)
+         slurp-html
+         print)
+     (println "No tutorial started"))))
 
 (defn help []
   (println (slurp-html "help.html")))
@@ -38,12 +40,12 @@
   (show-step))
 
 (defn next-step []
-  (when (< *current-step* (dec (count steps)))
+  (when (and *current-step* (< *current-step* (dec (count steps))))
     (set! *current-step* (inc *current-step*)))
   (show-step))
 
 (defn prev-step []
-  (when (< 0 *current-step*)
+  (when (and *current-step* (< 0 *current-step*))
     (set! *current-step* (dec *current-step*)))
   (show-step))
 
