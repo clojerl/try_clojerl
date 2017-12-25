@@ -8,7 +8,7 @@ all:
 	@ rebar3 compile
 
 repl: all
-	@ rebar3 clojerl repl
+	@ rebar3 clojerl repl --apps try_clojerl
 
 clean:
 	@ rm -rf _build rebar.lock
