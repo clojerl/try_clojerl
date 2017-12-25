@@ -1,7 +1,19 @@
 # Change Log
 
-## [0.4.2](https://github.com/clojerl/try_clojerl/tree/0.4.2)
+## [0.5.0](https://github.com/clojerl/try_clojerl/tree/0.5.0)
 
+[Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.4.2...0.5.0)
+
+**Implemented enhancements:**
+
+- Support for adding tutorials to guide visitors on what can be done with Clojerl [\#50](https://github.com/clojerl/try_clojerl/issues/50)
+
+**Merged pull requests:**
+
+- \[\#50\] Acknowledge and add license from Raynes/tryclojure  [\#52](https://github.com/clojerl/try_clojerl/pull/52) ([jfacorro](https://github.com/jfacorro))
+- \[Closes \#50\] Tutorials [\#51](https://github.com/clojerl/try_clojerl/pull/51) ([jfacorro](https://github.com/jfacorro))
+
+## [0.4.2](https://github.com/clojerl/try_clojerl/tree/0.4.2) (2017-12-19)
 [Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.4.1...0.4.2)
 
 **Implemented enhancements:**
