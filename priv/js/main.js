@@ -26,7 +26,6 @@ var init = function() {
   var self = this;
   self._conn = new Connection(URL);
   self._term = $('#terminal').console({
-    welcomeMessage: 'Welcome to Try Clojerl!',
     promptLabel: 'clje.user=> ',
     commandValidate: function(command) {
       return true;

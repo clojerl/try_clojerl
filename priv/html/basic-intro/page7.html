@@ -1,0 +1,9 @@
+Yay! It works!
+
+By now, you probably think that Clojure is very different from the programming languages you already know. Indeed, it belongs to a different family than most popular languages' - the family of "functional" programming languages. Like most functional languages, Clojure can define a function without even giving it a name:
+
+    (fn [x] (* x x))
+
+If you run this code, you'll see some cryptic output. In Clojure, functions are just normal values like numbers or strings. "fn" defines a function and then returns it. What you're seeing is simply what a function looks like when you print it on the screen.
+
+But wait - an anonymous function isn't very useful if you can't call it. Try to define a new anonymous function and call it straight away: "((fn [x] (* x x)) 10)".

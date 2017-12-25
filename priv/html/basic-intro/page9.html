@@ -1,0 +1,22 @@
+Success! Now you can call this new "square" function just like you called the old "square" function.
+
+By now, you know that lists are quite important in Clojure. But Clojure also has other data structures:
+
+Vectors: [1 2 3 4]
+Maps:    {:foo "bar" 3 4}
+Sets:    #{1 2 3 4}
+
+Vectors and lists are sequential and ordered collections.
+Sets are not ordered, and they cannot contain duplicate elements.
+Maps are key-value collections, where the keys can be any object.
+Here, we've used what Clojure calls a *keyword* (":foo") for one of the keys, and a number for the other key.
+
+Now I'll tell you another thing that may surprise you: Clojure collections are *immutable* - they can never change.
+When you do anything on a list, including adding and removing elements, you actually get a brand new list.
+(Fortunately, Clojure is amazingly efficient at creating new lists).
+In general, Clojure encourages you to have as little mutable state as possible.
+For example, instead of "for" loops and other state-changing constructs, most of the time you'll see functions doing transformations on immutable data and returning new collections, without changing the old one.
+
+A prime example of this is "map". "map" is a *higher order function*, which means that it takes another function as an argument.
+For example, you can ask "map" to increment each number in a vector by passing it the "inc" function, followed by the vector.
+Try it for yourself: type "(map inc [1 2 3 4])" to continue.

@@ -1,0 +1,12 @@
+One of Erlang's most useful features is pattern matching, which is very powerful.
+
+Clojerl provides support for pattern matching through some of the special forms. The main ones are "let*", "fn*" and "case*". When handling errors and exceptions, it is also possible to use pattern matching in "catch" clauses.
+
+Let's try is with a "case*" expression. First we will define the following function:
+
+    (defn one? [x]
+      (case* x
+        1 true
+        _ false))
+
+Now let's call this function to check if it works. First let's call it with 2 as an argument "(one? 2)" and it should return "false". Then let's call it with 1, "(one? 1)".

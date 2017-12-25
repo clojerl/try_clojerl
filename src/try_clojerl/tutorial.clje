@@ -1,0 +1,88 @@
+(ns try-clojerl.tutorial)
+
+(def ^:dynamic *tutorial* nil)
+(def ^:dynamic *step* nil)
+
+(def tutorials
+  {:basic-intro
+   {:desc  "Basic introduction to Clojure (taken from tryclj.com)"
+    :pages [{:name "page1.html"}
+            {:name "page2.html" :expr "(+ 3 3)"}
+            {:name "page3.html" :expr "(/ 10 3)"}
+            {:name "page4.html" :expr "(+ 1 2 3 4 5 6)"}
+            {:name "page5.html" :expr "(defn square [x] (* x x))"}
+            {:name "page6.html" :expr "(square 10)"}
+            {:name "page7.html" :expr "((fn [x] (* x x)) 10)"}
+            {:name "page8.html" :expr "(def square (fn [x] (* x x)))"}
+            {:name "page9.html" :expr "(map inc [1 2 3 4])"}
+            {:name "page10.html"}
+            {:name "end.html"}]}
+   :basic-interop
+   {:desc "Basic interoperability with Erlang"
+    :pages [{:name "page1.html" :expr "(erlang/self)"}
+            {:name "page2.html" :expr "(io/format \"Hello Universe!\\n\")"}
+            {:name "page3.html" :expr "(= (type {}) (type #erl{}))"}
+            {:name "page4.html" :expr "(one? 1)"}
+            {:name "page5.html" :expr "(one? 1)"}
+            {:name "end.html"}]}})
+
+(defn init []
+  (push-thread-bindings {#'*tutorial* nil
+                         #'*step* nil}))
+
+(defn slurp-html
+  [filename]
+  (let [priv-dir (code/priv_dir :try_clojerl)
+        path (str priv-dir "/html/" filename)]
+    (slurp path)))
+
+(defn show-step
+  ([] (show-step *step*))
+  ([n]
+   (if *tutorial*
+     (->> (get-in tutorials [*tutorial* :pages n :name])
+          (str (name *tutorial*) "/")
+          slurp-html
+          print)
+     (println "No tutorial started"))))
+
+(defn print-list []
+  (->> tutorials
+       (map (fn [[k v]]
+              {"Name" k "Description" (:desc v)}))
+       (clojure.pprint/print-table ["Name" "Description"])))
+
+(defn help []
+  (print (slurp-html "help.html"))
+  (print-list))
+
+(defn start
+  ([] (start :basic-intro))
+  ([name]
+   (set! *tutorial* name)
+   (set! *step* 0)
+   (show-step)))
+
+(defn next-step []
+  (when (and *tutorial*
+             *step*
+             (< *step* (dec (count (get-in tutorials [*tutorial* :pages])))))
+    (set! *step* (inc *step*)))
+  (show-step))
+
+(defn prev-step []
+  (when (and *step* (< 0 *step*))
+    (set! *step* (dec *step*)))
+  (show-step))
+
+(defn check-expr? [s]
+  (when (and *tutorial*
+             (-> (tutorials *tutorial*)
+                 :pages
+                 (get *step*)
+                 :expr
+                 (= s)))
+    (next-step)))
+
+(defn restart []
+  (start *tutorial*))

@@ -1,0 +1,9 @@
+It is also possible to use pattern matching at a function definition level using "defn*" instead of "defn".
+
+We can redefine the function "one?" using "defn*" and doing without the usage of "case*".
+
+    (defn* one?
+      ([1] true)
+      ([_] false))
+
+Now try this redefined function to see if it works by typing the same expressions as before "(one? 2)" and then "(one? 1)".

@@ -1,5 +1,6 @@
 (ns try-clojerl.repl
-  (:require [try-clojerl.clients :as c]))
+  (:require [try-clojerl.clients :as client]
+            [try-clojerl.tutorial :as tutorial]))
 
 (declare build-reply eval-string init-repl)
 
@@ -12,13 +13,15 @@
 
 (defn websocket_init [state]
   (lager/log :info (erlang/self) "REPL process started")
-  (c/add (erlang/self))
+  (client/add (erlang/self))
   (init-repl)
   (let [erlang-version  (-> :system_version
                             erlang/system_info
                             erlang/list_to_binary)
         clojerl-version (str "Clojerl " (clojure-version))
-        message         (str erlang-version clojerl-version)
+        message         (str erlang-version
+                             clojerl-version "\n"
+                             (tutorial/slurp-html "welcome.html"))
         reply           (build-reply :message message)]
     #erl[:reply reply state]))
 
@@ -38,7 +41,7 @@
    #erl[:ok state]))
 
 (defn terminate [reason _ state]
-  (c/remove (erlang/self))
+  (client/remove (erlang/self))
   (lager/log :info
              (erlang/self)
              "REPL process terminated: ~p" #erl(reason))
@@ -51,7 +54,9 @@
     (in-ns ns-name)
     (refer-clojure)
     (require '[clojure.repl :refer (source apropos dir pst doc find-doc)])
-    (require '[clojure.pprint :refer (pp pprint)])))
+    (require '[clojure.pprint :refer (pp pprint)])
+    (require '[try-clojerl.tutorial :as tutorial :refer (next-step prev-step)])
+    (tutorial/init)))
 
 (defn eval-string [s]
   (lager/log :info (erlang/self) "Eval: ~s" #erl(s))
@@ -67,6 +72,7 @@
                     "")
                   (finally
                     (erlang/group_leader group-leader (erlang/self))))]
+        (tutorial/check-expr? s)
         #erl[res (str *out*) (str *err*)]))))
 
 (defn prompt [] (str *ns* "=> "))
