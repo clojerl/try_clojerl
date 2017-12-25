@@ -16,6 +16,14 @@
             {:name "page8.html" :expr "(def square (fn [x] (* x x)))"}
             {:name "page9.html" :expr "(map inc [1 2 3 4])"}
             {:name "page10.html"}
+            {:name "end.html"}]}
+   :basic-interop
+   {:desc "Basic interoperability with Erlang"
+    :pages [{:name "page1.html" :expr "(erlang/self)"}
+            {:name "page2.html" :expr "(io/format \"Hello Universe!\\n\")"}
+            {:name "page3.html" :expr "(= (type {}) (type #erl{}))"}
+            {:name "page4.html" :expr "(one? 1)"}
+            {:name "page5.html" :expr "(one? 1)"}
             {:name "end.html"}]}})
 
 (defn init []
