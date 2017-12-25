@@ -32,7 +32,7 @@
   ([] (show-step *step*))
   ([n]
    (if *tutorial*
-     (->> (steps n)
+     (->> (get-in tutorials [*tutorial* :pages n :name])
           (str (name *tutorial*) "/")
           slurp-html
           print)
@@ -42,11 +42,10 @@
   (->> tutorials
        (map (fn [[k v]]
               {"Name" k "Description" (:desc v)}))
-       (interpose "\n")
        (clojure.pprint/print-table ["Name" "Description"])))
 
 (defn help []
-  (println (slurp-html "help.html"))
+  (print (slurp-html "help.html"))
   (print-list))
 
 (defn start
@@ -57,7 +56,9 @@
    (show-step)))
 
 (defn next-step []
-  (when (and *step* (< *step* (dec (count steps))))
+  (when (and *tutorial*
+             *step*
+             (< *step* (dec (count (get-in tutorials [*tutorial* :pages])))))
     (set! *step* (inc *step*)))
   (show-step))
 
@@ -76,4 +77,4 @@
     (next-step)))
 
 (defn restart []
-  (start))
+  (start *tutorial*))
