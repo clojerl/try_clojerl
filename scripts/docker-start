@@ -4,6 +4,8 @@ LOGDIR=/var/log/try_clojerl
 
 mkdir -p $LOGDIR
 
+docker pull jfacorro/try_clojerl:latest
+
 docker run -d                    \
         --restart unless-stopped \
         --name=try_clojerl       \
