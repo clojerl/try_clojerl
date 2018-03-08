@@ -11,12 +11,6 @@
 (defn stop [state]
   state)
 
-(defn ->list [s]
-  (clj_rt/to_list.1 s))
-
-(defn ->proplist [m]
-  (->list (map into-tuple m)))
-
 (def routes
   {:_ [["/"          :try-clojerl.layout :index]
        ["/about"     :try-clojerl.layout :about]
@@ -26,11 +20,11 @@
        ["/js/[...]"  :cowboy_static #erl[:priv_dir :try_clojerl "js"]]]})
 
 (defn- route->cowboy [[host handlers]]
-  #erl[host (->list (map into-tuple handlers))])
+  #erl[host (->erl (map into-tuple handlers))])
 
 (defn start-cowboy []
-  (let [routes (->list (map route->cowboy routes))
+  (let [routes (->erl (map route->cowboy routes))
         dispatch (cowboy_router/compile routes)
-        transport-opts (->proplist {:port 8080})
-        protocol-opts #erl{:env #erl{:dispatch dispatch}}]
+        transport-opts (maps/to_list (->erl {:port 8080}))
+        protocol-opts (->erl {:env {:dispatch dispatch}})]
     (cowboy/start_clear :try-clojerl.listener transport-opts protocol-opts)))
