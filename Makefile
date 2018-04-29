@@ -5,7 +5,7 @@ DOCKER_REPO := jfacorro/try_clojerl
 DOCKER_TAG  := $(shell git describe --tags --always 2>/dev/null || echo 0)
 
 all:
-	@ rebar3 compile
+	@ rebar3 clojerl compile
 
 repl: all
 	@ rebar3 clojerl repl --apps try_clojerl
@@ -13,8 +13,8 @@ repl: all
 clean:
 	@ rm -rf _build rebar.lock
 
-release: all
-	@ rebar3 as prod release
+release:
+	@ rebar3 as prod clojerl release
 
 docker-build: clean
 	@ docker run -i            \
