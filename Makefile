@@ -7,7 +7,7 @@ DOCKER_TAG  := $(shell git describe --tags --always 2>/dev/null || echo 0)
 all:
 	@ rebar3 clojerl compile
 
-repl: all
+repl:
 	@ rebar3 clojerl repl --apps try_clojerl
 
 clean:
