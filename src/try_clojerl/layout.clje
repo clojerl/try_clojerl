@@ -17,10 +17,10 @@
    [:meta {:name "viewport"
            :content "initial-scale=1, maximum-scale=1, user-scalable=0"}]
    [:title title]
-   (include-css "css/jquery.terminal.css"
+   (include-css "css/jquery.terminal.min.css"
                 "css/main.css")
    (include-js "js/jquery-1.7.1.min.js"
-               "js/jquery.terminal.js"
+               "js/jquery.terminal.min.js"
                "js/main.js")])
 
 (def clojerl-url "https://github.com/jfacorro/clojerl")
