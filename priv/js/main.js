@@ -24,22 +24,20 @@ var Connection = function(url) {
 
 var init = function() {
   var self = this;
+  var opts = {
+    prompt: 'clje.user=> ',
+    name: 'clojerl_repl',
+    greetings: null,
+    height: 500
+  };
+  self._eval = function(command) {
+    if (command.trim() !== '') {
+      var message = {cmd: command};
+      self._conn.send(JSON.stringify(message));
+    }
+  };
+  self._term = $('#terminal').terminal(self._eval, opts);
   self._conn = new Connection(URL);
-  self._term = $('#terminal').console({
-    promptLabel: 'clje.user=> ',
-    commandValidate: function(command) {
-      return true;
-    },
-    commandHandle: function(command) {
-      self.eval(command);
-      // Enable the input since sometimes it
-      // stays disabled
-      self._term.enableInput();
-    },
-    autofocus:true,
-    animateScroll:true,
-    promptHistory:true
-  });
 
   self.clientCount = function(count) {
     if(count) {
@@ -49,38 +47,23 @@ var init = function() {
   };
 
   self.error = function(message) {
-    self._term.commandResult([{msg: message, className: 'stderr'}]);
+    self._term.error(message);
   };
 
-  self.eval = function(command) {
-    if (command.trim() !== '') {
-      var message = {cmd: command};
-      self._conn.send(JSON.stringify(message));
-    } else {
-      self._term.commandResult();
-    }
-  };
 
   self.print = function(json) {
-    self._term.promptLabel = json.prompt;
-    self._term.report(json.message, 'stdout');
+    if(json.message) self._term.echo(json.message);
+    self._term.set_prompt(json.prompt);
     self.clientCount(json.client_count);
 
-    if( json.result != undefined ||
-        json.stdout != undefined ||
-        json.stderr != undefined
-      ) {
-      var msgs = [ {msg: json.stdout, className: 'stdout'},
-                   {msg: json.stderr, className: 'stderr'},
-                   {msg: json.result, className: 'result'}
-                 ];
-      self._term.commandResult(msgs);
-    }
+    if(json.result) self._term.echo(json.result);
+    if(json.stdout) self._term.echo(json.stdout);
+    if(json.stderr) self._term.error(json.stderr);
   };
 
   self._conn.onopen = function(message) {
     self._attempts = 0;
-    self._term.report("WebSocket connection established");
+    self._term.echo("WebSocket connection established");
   };
 
   self._conn.onmessage = function(message) {

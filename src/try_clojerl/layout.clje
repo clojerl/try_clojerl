@@ -15,9 +15,10 @@
   [:head
    google-analytics
    [:title title]
-   (include-css "css/main.css")
+   (include-css "css/jquery.terminal.css"
+                "css/main.css")
    (include-js "js/jquery-1.7.1.min.js"
-               "js/jquery.console.js"
+               "js/jquery.terminal.js"
                "js/main.js")])
 
 (def clojerl-url "https://github.com/jfacorro/clojerl")
