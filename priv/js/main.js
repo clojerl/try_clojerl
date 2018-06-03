@@ -50,15 +50,22 @@ var init = function() {
     self._term.error(message);
   };
 
-
   self.print = function(json) {
-    if(json.message) self._term.echo(json.message);
+    self.echo(json.message, 'stdout');
     self._term.set_prompt(json.prompt);
     self.clientCount(json.client_count);
 
-    if(json.result) self._term.echo(json.result);
-    if(json.stdout) self._term.echo(json.stdout);
-    if(json.stderr) self._term.error(json.stderr);
+    self.echo(json.result, 'result');
+    self.echo(json.stdout, 'stdout');
+    self.echo(json.stderr, 'stderr');
+  };
+
+  self.echo = function(msg, cssClass) {
+    if(msg) {
+      msg = $.terminal.escape_brackets(msg);
+      msg =  '[[;;;' + cssClass + ']' + msg + ']';
+      self._term.echo(msg);
+    }
   };
 
   self._conn.onopen = function(message) {
