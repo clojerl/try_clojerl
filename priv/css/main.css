@@ -1,122 +1,171 @@
 html {
-    background: url(../img/background.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    height: 100%;
-    overflow: hidden;
+  background: url(../img/background.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
 }
 
 #content {
-    width: 700px;
-    margin: auto;
+  width: 90%;
+  margin: auto;
 }
 
 #header h1 {
-    text-align: center;
-    text-shadow: 0 0 5px #FFF;
-    font-family: Andale Mono, monospace;
-    color: white;
+  text-align: center;
+  text-shadow: 0 0 5px #FFF;
+  font-family: Andale Mono, monospace;
+  color: white;
 }
 
 #footer {
-    margin: 10px 0px;
-    text-align: center;
-    color: white;
-    font-family: Arial, sans-serif;
-    font-size: 0.9em;
+  margin: 10px 0px;
+  text-align: center;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 0.9em;
 }
 
 #footer a {
-    margin: 0px 5px;
+  margin: 0px 5px;
 }
 
 a:hover, a:visited, a:link, a:active {
-    color: white;
-    text-shadow: 0px 0px 5px #FFF;
-    text-decoration: none;
+  color: white;
+  text-shadow: 0px 0px 5px #FFF;
+  text-decoration: none;
 }
 
 a:hover {
-    text-shadow: 0px 0px 5px #333;
+  text-shadow: 0px 0px 5px #333;
 }
 
 #ribbon {
-    position: absolute;
-    top: 0;
-    right: 0;
-    border: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
 }
 
-#terminal, #about, #client-count {
-    background:rgba(0, 0, 0, 0.85);
-    border-radius: 5px;
-    padding: 10px;
+
+pre {
+  margin: 0px;
+  white-space: pre-wrap;       /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+#about, #client-count {
+  background:rgba(0, 0, 0, 0.85);
+  border-radius: 5px;
+  padding: 10px;
 }
 
 #about {
-    background:rgba(0, 0, 0, 0.7);
-    font-family: Arial, sans-serif;
-    font-size: 1em;
-    color: white;
-    text-align: justify;
+  background:rgba(0, 0, 0, 0.7);
+  font-family: Arial, sans-serif;
+  font-size: 1em;
+  color: white;
+  text-align: justify;
 }
 
 #client-count {
-    float: right;
-    background:rgba(0, 0, 0, 0.5);
-    margin-top: 5px;
-    padding: 5px;
-    font-family:monospace;
-    font-size: 14px;
-    color: white;
-    text-shadow: 0 0 10px #FFF;
+  float: right;
+  background:rgba(0, 0, 0, 0.5);
+  margin-top: 5px;
+  padding: 5px;
+  font-family:monospace;
+  font-size: 14px;
+  color: white;
+  text-shadow: 0 0 10px #FFF;
 }
 
-#terminal {
-    color: #CCC;
-    font-size: 14px;
-    font-family:monospace;
-    height: 500px;
+.terminal {
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 5px;
+  padding: 10px;
+  color: #CCC;
+  font-family:monospace;
+  height: 70vh;
 }
 
-#terminal div.jquery-console-inner {
-    word-wrap: break-word;
-    height: 500px;
-    overflow-y: auto;
+.terminal div.terminal-wrapper {
+  word-wrap: break-word;
+  overflow-y: auto;
 }
 
-#terminal div.jquery-console-prompt-box {
-    color:#FFF;
-    text-shadow: 0 0 10px #FFF;
+.terminal .cmd {
+  background: transparent;
+  color:#FFF;
+  text-shadow: 0 0 10px #FFF;
 }
 
-#terminal div span.jquery-console-cursor {
-    background:#EEE;
-    color: #000;
+.terminal, .cmd, .terminal .terminal-output > div > div, .cmd .prompt {
+  font-size: 1em;
+  line-height: 1em;
 }
 
-#terminal .stdout {
-    color: #FF0;
-    font-family: monospace;
+.terminal .stdout {
+  color: #FF0;
+  font-family: monospace;
 }
 
-#terminal .stderr {
-    color: #ef0505;
-    font-family: monospace;
+.terminal .stderr {
+  color: #ef0505;
+  font-family: monospace;
 }
 
-#terminal .result {
-    color: #0FF;
-    font-family: monospace;
+.terminal .result {
+  color: #0FF;
+  font-family: monospace;
 }
 
-pre {
-    margin: 0px;
-    white-space: pre-wrap;       /* Since CSS 2.1 */
-    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-    white-space: -pre-wrap;      /* Opera 4-6 */
-    white-space: -o-pre-wrap;    /* Opera 7 */
-    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+
+/* Override color for cursor animation */
+
+@-webkit-keyframes terminal-blink {
+  0%, 100% {
+    background-color: transparent;
+    color: #FFF;
+  }
+  50% {
+    background-color: #bbb;
+    color: transparent;
+  }
+}
+
+@-ms-keyframes terminal-blink {
+  0%, 100% {
+    background-color: transparent;
+    color: #FFF;
+  }
+  50% {
+    background-color: #bbb;
+    color: transparent;
+  }
+}
+
+@-moz-keyframes terminal-blink {
+  0%, 100% {
+    background-color: transparent;
+    color: #FFF;
+  }
+  50% {
+    background-color: #bbb;
+    color: transparent;
+  }
+}
+@keyframes terminal-blink {
+  0%, 100% {
+    background-color: transparent;
+    color: #FFF;
+  }
+  50% {
+    background-color: #FFF;
+    color: transparent;
+  }
 }
