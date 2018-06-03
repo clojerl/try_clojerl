@@ -14,6 +14,8 @@
 (defn head [title]
   [:head
    google-analytics
+   [:meta {:name "viewport"
+           :content "initial-scale=1, maximum-scale=1, user-scalable=0"}]
    [:title title]
    (include-css "css/jquery.terminal.css"
                 "css/main.css")
@@ -82,8 +84,8 @@ can handle at the same."]])
   (html5
    (head title)
    [:body
-    ribbon
-    [:div#content header content footer]]))
+    [:div#content header content footer]
+    ribbon]))
 
 (defn init
   [req page-id]

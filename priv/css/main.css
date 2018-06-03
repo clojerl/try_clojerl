@@ -9,7 +9,7 @@ html {
 }
 
 #content {
-  width: 700px;
+  width: 90%;
   margin: auto;
 }
 
@@ -89,9 +89,8 @@ pre {
   border-radius: 5px;
   padding: 10px;
   color: #CCC;
-  font-size: 14px;
   font-family:monospace;
-  height: 500px;
+  height: 70vh;
 }
 
 .terminal div.terminal-wrapper {
@@ -99,10 +98,15 @@ pre {
   overflow-y: auto;
 }
 
-.terminal div.cmd {
+.terminal .cmd {
   background: transparent;
   color:#FFF;
   text-shadow: 0 0 10px #FFF;
+}
+
+.terminal, .cmd, .terminal .terminal-output > div > div, .cmd .prompt {
+  font-size: 1em;
+  line-height: 1em;
 }
 
 .terminal .stdout {

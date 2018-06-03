@@ -28,7 +28,6 @@ var init = function() {
     prompt: 'clje.user=> ',
     name: 'clojerl_repl',
     greetings: null,
-    height: 500
   };
   self._eval = function(command) {
     if (command.trim() !== '') {
