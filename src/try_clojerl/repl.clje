@@ -75,7 +75,7 @@
         (tutorial/check-expr? s)
         #erl[res (str *out*) (str *err*)]))))
 
-(defn prompt [] (str *ns* "=> "))
+(defn prompt [] (str (.name *ns*) "=> "))
 
 (defn build-reply
   [& keyvals]
