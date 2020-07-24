@@ -12,19 +12,16 @@
   state)
 
 (def routes
-  {:_ [["/"          :try-clojerl.layout :index]
-       ["/about"     :try-clojerl.layout :about]
-       ["/repl"      :try-clojerl.repl   nil]
-       ["/css/[...]" :cowboy_static #erl[:priv_dir :try_clojerl "css"]]
-       ["/img/[...]" :cowboy_static #erl[:priv_dir :try_clojerl "img"]]
-       ["/js/[...]"  :cowboy_static #erl[:priv_dir :try_clojerl "js"]]]})
-
-(defn- route->cowboy [[host handlers]]
-  #erl[host (->erl (map into-tuple handlers))])
+  '{:_ (["/"          :try-clojerl.layout :index]
+        ["/about"     :try-clojerl.layout :about]
+        ["/repl"      :try-clojerl.repl   nil]
+        ["/css/[...]" :cowboy_static [:priv_dir :try_clojerl "css"]]
+        ["/img/[...]" :cowboy_static [:priv_dir :try_clojerl "img"]]
+        ["/js/[...]"  :cowboy_static [:priv_dir :try_clojerl "js"]])})
 
 (defn start-cowboy []
-  (let [routes (->erl (map route->cowboy routes))
+  (let [routes (-> routes clj->erl maps/to_list)
         dispatch (cowboy_router/compile routes)
-        transport-opts (maps/to_list (->erl {:port 8080}))
-        protocol-opts (->erl {:env {:dispatch dispatch}})]
+        transport-opts (-> {:port 8080} clj->erl maps/to_list)
+        protocol-opts (clj->erl {:env {:dispatch dispatch}})]
     (cowboy/start_clear :try-clojerl.listener transport-opts protocol-opts)))
