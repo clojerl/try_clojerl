@@ -1,6 +1,104 @@
-# Change Log
+# Changelog
 
-## [0.5.0](https://github.com/clojerl/try_clojerl/tree/0.5.0)
+## [0.9.1](https://github.com/clojerl/try_clojerl/tree/0.9.1) (2020-07-27)
+
+[Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.9.0...0.9.1)
+
+**Fixed bugs:**
+
+- Use compression for websockets once ERL-494 is solved [\#11](https://github.com/clojerl/try_clojerl/issues/11)
+
+**Closed issues:**
+
+- Make REPL vars like \*1 available [\#65](https://github.com/clojerl/try_clojerl/issues/65)
+
+**Merged pull requests:**
+
+- \[\#11\] Enable compression for websockets [\#67](https://github.com/clojerl/try_clojerl/pull/67) ([jfacorro](https://github.com/jfacorro))
+- \[\#65\] Make REPL vars available [\#66](https://github.com/clojerl/try_clojerl/pull/66) ([jfacorro](https://github.com/jfacorro))
+
+## [0.9.0](https://github.com/clojerl/try_clojerl/tree/0.9.0) (2020-07-27)
+
+[Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.8.0...0.9.0)
+
+**Closed issues:**
+
+- Web page opens print dialog on iOS [\#58](https://github.com/clojerl/try_clojerl/issues/58)
+
+**Merged pull requests:**
+
+- minor typo [\#63](https://github.com/clojerl/try_clojerl/pull/63) ([Tuxified](https://github.com/Tuxified))
+
+## [0.8.0](https://github.com/clojerl/try_clojerl/tree/0.8.0) (2020-03-23)
+
+[Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.7.0...0.8.0)
+
+**Merged pull requests:**
+
+- Bump clojerl to 0.6.0 [\#64](https://github.com/clojerl/try_clojerl/pull/64) ([jfacorro](https://github.com/jfacorro))
+
+## [0.7.0](https://github.com/clojerl/try_clojerl/tree/0.7.0) (2019-07-29)
+
+[Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.6.0...0.7.0)
+
+**Merged pull requests:**
+
+- Bump clojerl, plugin and deps [\#62](https://github.com/clojerl/try_clojerl/pull/62) ([jfacorro](https://github.com/jfacorro))
+- Use hex deps [\#61](https://github.com/clojerl/try_clojerl/pull/61) ([jfacorro](https://github.com/jfacorro))
+
+## [0.6.0](https://github.com/clojerl/try_clojerl/tree/0.6.0) (2019-06-19)
+
+[Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.5.5...0.6.0)
+
+**Merged pull requests:**
+
+- Update to latest clojerl release [\#60](https://github.com/clojerl/try_clojerl/pull/60) ([jfacorro](https://github.com/jfacorro))
+
+## [0.5.5](https://github.com/clojerl/try_clojerl/tree/0.5.5) (2018-09-03)
+
+[Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.5.4...0.5.5)
+
+**Implemented enhancements:**
+
+- Console doesn't work on mobile [\#53](https://github.com/clojerl/try_clojerl/issues/53)
+
+**Merged pull requests:**
+
+- Use latest clojerl and rebar3 plugin [\#59](https://github.com/clojerl/try_clojerl/pull/59) ([jfacorro](https://github.com/jfacorro))
+
+## [0.5.4](https://github.com/clojerl/try_clojerl/tree/0.5.4) (2018-06-03)
+
+[Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.5.3...0.5.4)
+
+**Merged pull requests:**
+
+- \[Closes \#53\] Support for mobile browsers [\#57](https://github.com/clojerl/try_clojerl/pull/57) ([jfacorro](https://github.com/jfacorro))
+
+## [0.5.3](https://github.com/clojerl/try_clojerl/tree/0.5.3) (2018-06-03)
+
+[Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.5.2...0.5.3)
+
+**Fixed bugs:**
+
+- Background image does not fill screen on mobile [\#55](https://github.com/clojerl/try_clojerl/issues/55)
+
+**Merged pull requests:**
+
+- \[Closes \#55\] Apply background to html element [\#56](https://github.com/clojerl/try_clojerl/pull/56) ([jfacorro](https://github.com/jfacorro))
+
+## [0.5.2](https://github.com/clojerl/try_clojerl/tree/0.5.2) (2018-05-20)
+
+[Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.5.1...0.5.2)
+
+**Merged pull requests:**
+
+- Latest clojerl version build fails to start [\#54](https://github.com/clojerl/try_clojerl/pull/54) ([jfacorro](https://github.com/jfacorro))
+
+## [0.5.1](https://github.com/clojerl/try_clojerl/tree/0.5.1) (2018-03-08)
+
+[Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.5.0...0.5.1)
+
+## [0.5.0](https://github.com/clojerl/try_clojerl/tree/0.5.0) (2017-12-25)
 
 [Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.4.2...0.5.0)
 
@@ -14,6 +112,7 @@
 - \[Closes \#50\] Tutorials [\#51](https://github.com/clojerl/try_clojerl/pull/51) ([jfacorro](https://github.com/jfacorro))
 
 ## [0.4.2](https://github.com/clojerl/try_clojerl/tree/0.4.2) (2017-12-19)
+
 [Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.4.1...0.4.2)
 
 **Implemented enhancements:**
@@ -25,6 +124,7 @@
 - \[Closes \#48\] io/format output not showing [\#49](https://github.com/clojerl/try_clojerl/pull/49) ([jfacorro](https://github.com/jfacorro))
 
 ## [0.4.1](https://github.com/clojerl/try_clojerl/tree/0.4.1) (2017-12-02)
+
 [Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.4.0...0.4.1)
 
 **Implemented enhancements:**
@@ -42,6 +142,7 @@
 - Remove .e suffix [\#43](https://github.com/clojerl/try_clojerl/pull/43) ([jfacorro](https://github.com/jfacorro))
 
 ## [0.4.0](https://github.com/clojerl/try_clojerl/tree/0.4.0) (2017-11-08)
+
 [Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.3.1...0.4.0)
 
 **Implemented enhancements:**
@@ -55,6 +156,7 @@
 - \[Closes \#39\] build centos docker image [\#40](https://github.com/clojerl/try_clojerl/pull/40) ([jfacorro](https://github.com/jfacorro))
 
 ## [0.3.1](https://github.com/clojerl/try_clojerl/tree/0.3.1) (2017-10-27)
+
 [Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.3.0...0.3.1)
 
 **Closed issues:**
@@ -66,9 +168,11 @@
 - \[Closes \#37\] Google analytics [\#38](https://github.com/clojerl/try_clojerl/pull/38) ([jfacorro](https://github.com/jfacorro))
 
 ## [0.3.0](https://github.com/clojerl/try_clojerl/tree/0.3.0) (2017-10-25)
+
 [Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.2.1...0.3.0)
 
 ## [0.2.1](https://github.com/clojerl/try_clojerl/tree/0.2.1) (2017-10-21)
+
 [Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.2.0...0.2.1)
 
 **Implemented enhancements:**
@@ -84,6 +188,7 @@
 - Wrap lines around and fix terminal width [\#35](https://github.com/clojerl/try_clojerl/issues/35)
 
 ## [0.2.0](https://github.com/clojerl/try_clojerl/tree/0.2.0) (2017-10-20)
+
 [Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.1.2...0.2.0)
 
 **Fixed bugs:**
@@ -105,6 +210,7 @@
 - \[Closes \#28\] Add logging when REPL process starts and terminates [\#29](https://github.com/clojerl/try_clojerl/pull/29) ([jfacorro](https://github.com/jfacorro))
 
 ## [0.1.2](https://github.com/clojerl/try_clojerl/tree/0.1.2) (2017-10-16)
+
 [Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.1.1...0.1.2)
 
 **Merged pull requests:**
@@ -113,6 +219,7 @@
 - Show Erlang and Clojerl version used [\#24](https://github.com/clojerl/try_clojerl/pull/24) ([jfacorro](https://github.com/jfacorro))
 
 ## [0.1.1](https://github.com/clojerl/try_clojerl/tree/0.1.1) (2017-10-14)
+
 [Full Changelog](https://github.com/clojerl/try_clojerl/compare/0.1.0...0.1.1)
 
 **Implemented enhancements:**
@@ -124,6 +231,9 @@
 - \[Close \#22\] Run as non-root user [\#23](https://github.com/clojerl/try_clojerl/pull/23) ([jfacorro](https://github.com/jfacorro))
 
 ## [0.1.0](https://github.com/clojerl/try_clojerl/tree/0.1.0) (2017-10-12)
+
+[Full Changelog](https://github.com/clojerl/try_clojerl/compare/a02b1ff5f38c727e88637aae3b1129f68ccee57c...0.1.0)
+
 **Implemented enhancements:**
 
 - Update README.md [\#17](https://github.com/clojerl/try_clojerl/issues/17)
@@ -155,4 +265,4 @@
 
 
 
-\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
