@@ -56,6 +56,11 @@
     (require '[clojure.repl :refer (source apropos dir pst doc find-doc)])
     (require '[clojure.pprint :refer (pp pprint)])
     (require '[try-clojerl.tutorial :as tutorial :refer (next-step prev-step)])
+    (push-thread-bindings {#'*1 nil
+                           #'*2 nil
+                           #'*3 nil
+                           #'*e nil
+                           #'*stacktrace nil})
     (tutorial/init)))
 
 (defn eval-string [s]
@@ -66,8 +71,14 @@
       (let [group-leader (erlang/group_leader)
             res (try
                   (erlang/group_leader (maps/get :pid out) (erlang/self))
-                  (-> s read-string eval pr-str)
-                  (catch _ e
+                  (let [value (-> s read-string eval)]
+                    (set! *3 *2)
+                    (set! *2 *1)
+                    (set! *1 value)
+                    (pr-str value))
+                  (catch _ e :stack st
+                    (set! *e e)
+                    (set! *stacktrace st)
                     (.write *err* (str "Error: " (pr-str e)))
                     "")
                   (finally
