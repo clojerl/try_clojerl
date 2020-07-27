@@ -14,10 +14,10 @@ clean:
 	@ rm -rf _build rebar.lock
 
 release:
-	@ rebar3 as prod do clojerl compile, release
+	@ rebar3 as prod do clojerl compile, clojerl release
 
 start-release:
-	CODE_LOADING_MODE=interactive _build/prod/rel/try_clojerl/bin/try_clojerl console
+	_build/prod/rel/try_clojerl/bin/try_clojerl console
 
 docker-build: clean
 	@ docker run -i            \

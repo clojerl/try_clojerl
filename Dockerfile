@@ -10,6 +10,4 @@ RUN apk add --update ncurses openssl \
 
 USER clojerl
 
-ENV CODE_LOADING_MODE interactive
-
 ENTRYPOINT /opt/try_clojerl/bin/try_clojerl foreground
