@@ -2,6 +2,8 @@ FROM alpine:3.9.4
 
 COPY _build/prod/rel/try_clojerl /opt/try_clojerl
 
+ENV CODE_LOADING_MODE interactive
+
 RUN apk add --update ncurses openssl \
     && adduser -D -S -u 1000 clojerl \
     && mkdir -p /var/log/try_clojerl \

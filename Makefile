@@ -17,7 +17,7 @@ release: clean
 	@ rebar3 as prod do clojerl compile, clojerl release
 
 start-release:
-	_build/prod/rel/try_clojerl/bin/try_clojerl console
+	CODE_LOADING_MODE=interactive _build/prod/rel/try_clojerl/bin/try_clojerl console
 
 docker-build: clean
 	@ docker run -i            \
