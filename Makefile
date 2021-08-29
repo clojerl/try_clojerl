@@ -1,6 +1,6 @@
 .PHONY: all release clean docker-build docker
 
-BUILD_IMAGE ?= erlang:22.0.4-alpine
+BUILD_IMAGE ?= erlang:23-alpine
 DOCKER_REPO := jfacorro/try_clojerl
 DOCKER_TAG  := $(shell git describe --tags --always 2>/dev/null || echo 0)
 
@@ -13,11 +13,11 @@ repl:
 clean:
 	@ rm -rf _build rebar.lock
 
-release:
+release: clean
 	@ rebar3 as prod do clojerl compile, clojerl release
 
 start-release:
-	_build/prod/rel/try_clojerl/bin/try_clojerl console
+	CODE_LOADING_MODE=interactive _build/prod/rel/try_clojerl/bin/try_clojerl console
 
 docker-build: clean
 	@ docker run -i            \
