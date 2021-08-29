@@ -13,7 +13,7 @@ repl:
 clean:
 	@ rm -rf _build rebar.lock
 
-release:
+release: clean
 	@ rebar3 as prod do clojerl compile, clojerl release
 
 start-release:
