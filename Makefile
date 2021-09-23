@@ -1,6 +1,6 @@
 .PHONY: all release clean docker-build docker
 
-BUILD_IMAGE ?= erlang:23-alpine
+BUILD_IMAGE ?= erlang:24-alpine
 DOCKER_REPO := jfacorro/try_clojerl
 DOCKER_TAG  := $(shell git describe --tags --always 2>/dev/null || echo 0)
 
