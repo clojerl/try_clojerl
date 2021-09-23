@@ -4,7 +4,7 @@ COPY _build/prod/rel/try_clojerl /opt/try_clojerl
 
 ENV CODE_LOADING_MODE interactive
 
-RUN apk add --update ncurses openssl \
+RUN apk add --update ncurses openssl gcc \
     && adduser -D -S -u 1000 clojerl \
     && mkdir -p /var/log/try_clojerl \
     && chown -R clojerl /opt/try_clojerl \
