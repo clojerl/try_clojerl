@@ -32,7 +32,10 @@ html {
   margin: 0px 5px;
 }
 
-a:hover, a:visited, a:link, a:active {
+a:hover,
+a:visited,
+a:link,
+a:active {
   color: white;
   text-shadow: 0px 0px 5px #FFF;
   text-decoration: none;
@@ -49,24 +52,91 @@ a:hover {
   border: 0;
 }
 
+#forkongithub a {
+  background: #fff;
+  color: #000;
+  text-decoration: none;
+  font-family: arial, sans-serif;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px 40px;
+  font-size: 1rem;
+  line-height: 2rem;
+  position: relative;
+  transition: 0.5s;
+}
+
+#forkongithub a:hover {
+  background: #ddd;
+  color: #333;
+}
+
+#forkongithub a::before,
+#forkongithub a::after {
+  content: "";
+  width: 100%;
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 0;
+  height: 1px;
+  background: #000;
+}
+
+#forkongithub a::after {
+  bottom: 1px;
+  top: auto;
+}
+
+@media screen and (min-width:800px) {
+  #forkongithub {
+    position: fixed;
+    display: block;
+    top: 0;
+    right: 0;
+    width: 200px;
+    overflow: hidden;
+    height: 200px;
+    z-index: 9999;
+  }
+
+  #forkongithub a {
+    width: 200px;
+    position: absolute;
+    top: 60px;
+    right: -60px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8);
+  }
+}
 
 pre {
   margin: 0px;
-  white-space: pre-wrap;       /* Since CSS 2.1 */
-  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-  white-space: -pre-wrap;      /* Opera 4-6 */
-  white-space: -o-pre-wrap;    /* Opera 7 */
-  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  white-space: pre-wrap;
+  /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;
+  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;
+  /* Opera 4-6 */
+  white-space: -o-pre-wrap;
+  /* Opera 7 */
+  word-wrap: break-word;
+  /* Internet Explorer 5.5+ */
 }
 
-#about, #client-count {
-  background:rgba(0, 0, 0, 0.85);
+#about,
+#client-count {
+  background: rgba(0, 0, 0, 0.85);
   border-radius: 5px;
   padding: 10px;
 }
 
 #about {
-  background:rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.7);
   font-family: Arial, sans-serif;
   font-size: 1em;
   color: white;
@@ -75,10 +145,10 @@ pre {
 
 #client-count {
   float: right;
-  background:rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
   margin-top: 5px;
   padding: 5px;
-  font-family:monospace;
+  font-family: monospace;
   font-size: 14px;
   color: white;
   text-shadow: 0 0 10px #FFF;
@@ -89,7 +159,7 @@ pre {
   border-radius: 5px;
   padding: 10px;
   color: #CCC;
-  font-family:monospace;
+  font-family: monospace;
   height: 70vh;
 }
 
@@ -100,11 +170,14 @@ pre {
 
 .terminal .cmd {
   background: transparent;
-  color:#FFF;
+  color: #FFF;
   text-shadow: 0 0 10px #FFF;
 }
 
-.terminal, .cmd, .terminal .terminal-output > div > div, .cmd .prompt {
+.terminal,
+.cmd,
+.terminal .terminal-output>div>div,
+.cmd .prompt {
   font-size: 1em;
   line-height: 1em;
 }
@@ -128,10 +201,13 @@ pre {
 /* Override color for cursor animation */
 
 @-webkit-keyframes terminal-blink {
-  0%, 100% {
+
+  0%,
+  100% {
     background-color: transparent;
     color: #FFF;
   }
+
   50% {
     background-color: #bbb;
     color: transparent;
@@ -139,10 +215,13 @@ pre {
 }
 
 @-ms-keyframes terminal-blink {
-  0%, 100% {
+
+  0%,
+  100% {
     background-color: transparent;
     color: #FFF;
   }
+
   50% {
     background-color: #bbb;
     color: transparent;
@@ -150,20 +229,27 @@ pre {
 }
 
 @-moz-keyframes terminal-blink {
-  0%, 100% {
+
+  0%,
+  100% {
     background-color: transparent;
     color: #FFF;
   }
+
   50% {
     background-color: #bbb;
     color: transparent;
   }
 }
+
 @keyframes terminal-blink {
-  0%, 100% {
+
+  0%,
+  100% {
     background-color: transparent;
     color: #FFF;
   }
+
   50% {
     background-color: #FFF;
     color: transparent;
