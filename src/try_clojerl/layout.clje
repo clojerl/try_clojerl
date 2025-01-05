@@ -34,12 +34,9 @@
              (link-to "/about" "About")
              (link-to clojerl-url "Clojerl")])
 
-(def ribbon-img
-  "https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png")
-
-(def ribbon (link-to "https://github.com/clojerl/try_clojerl"
-                     [:img#ribbon {:src ribbon-img
-                                   :alt "Fork me on GitHub"}]))
+(def ribbon [:span#forkongithub
+             (link-to "https://github.com/clojerl/try_clojerl"
+                      "Fork me on GitHub")])
 
 (def index [:div [:div#terminal]
                  [:div#client-count]])
